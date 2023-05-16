@@ -13,12 +13,12 @@ public class ProductsController : Controller
         return View(ViewModel);
     }
     
-    private static List<Product> _products = new List<Product>
+    private static List<ProductModel> _products = new List<ProductModel>
     {
-        new Product { Name = "Pepsi", Price = 20, Quantity = 2},
-        new Product { Name = "Cola", Price = 20, Quantity = 3 },
-        new Product { Name = "Tatranka", Price = 10, Quantity = 5 },
-        new Product { Name = "Čokoláda Milka", Price = 40, Quantity = 3 }
+        new ProductModel { Name = "Pepsi", Price = 20, Quantity = 2},
+        new ProductModel { Name = "Cola", Price = 20, Quantity = 3 },
+        new ProductModel { Name = "Tatranka", Price = 10, Quantity = 5 },
+        new ProductModel { Name = "Čokoláda Milka", Price = 40, Quantity = 3 }
     };
     
     public IActionResult Administration()
