@@ -5,13 +5,12 @@
     Layout = "_Layout";
 }
 <div class="container">
-    <button class="add-product">
-          Přidat produkt
-        </button>
+    <button onclick="product_add()" id="product-add">Přidat položku</button>
     <table class="table">
         <thead>
         <tr>
             <th colspan="2" class="text-center">Produkt</th>
+            <th>Obrázek</th>
             <th>Cena za ks</th>
             <th>Aktuální množství</th>
             <th></th>
@@ -21,18 +20,41 @@
         @foreach (var product in Model.Products)
         {
             <tr>
-                <td>@product.Name</td>
+                <td colspan="2">@product.Name</td>
                 <td><img src="obrazek1.jpg" alt="Obrázek 1"></td>
                 <td>@product.Price</td>
                 <td>@product.Quantity</td>
-                <td>
-                    <a href="#" class="btn btn-primary">Editovat</a>
-                    <a href="#" class="btn btn-danger">Smazat</a>
-                </td>
             </tr>
         }
         </tbody>
     </table>
 </div>
+
+<script>
+    function product_add() {
+        const table = $('table tbody');
+        table.prepend(
+            '<tr>'
+            + '<td class="name">'
+            + '<input type="text" class="form-control" name="Name" />'
+            + '</td>'
+            + '<td class="image">'
+            + '<input type="file" class="form-control" name="Image" />'
+            + '</td>'
+            + '<td class="price">'
+            + '<input type="number" class="form-control" name="Price" />'
+            + '</td>'
+            + '<td class="quantity">'
+            + '<input type="number" class="form-control" name="Quantity" />'
+            + '</td>'
+            + '<td class="buttons d-flex justify-content-between">'
+            + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
+            + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
+            + '</td>'
+            + '</tr>'
+     );
+}
+
+</script>
 
 
