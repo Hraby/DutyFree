@@ -1,0 +1,38 @@
+@model DutyFree.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "Product admin panel";
+    Layout = "_Layout";
+}
+<div class="container">
+    <button class="add-product">
+          Přidat produkt
+        </button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th colspan="2" class="text-center">Produkt</th>
+            <th>Cena za ks</th>
+            <th>Aktuální množství</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td><img src="obrazek1.jpg" alt="Obrázek 1"></td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Editovat</a>
+                    <a href="#" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+
