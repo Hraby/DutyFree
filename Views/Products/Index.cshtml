@@ -1,0 +1,56 @@
+@model DutyFree.Models.AdminViewModel
+@{
+    ViewData["Title"] = "Produkty";
+}
+
+<div class="container">
+    <div class="vyhledavaci-lista">
+        <h1 class="text-center">Na co máš chuť?</h1>
+        <div class="input-group mb-3 rounded-0">
+            <input type="text" class="form-control">
+            <div class="input-group-next">
+                <button class="btn rounded-0" type="button">Vyhledat</button>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="karticka">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var product in Model.Products)
+            {
+            <div class="col">
+                <div class="card">
+                    <img src="toast.png" class="card-img-top" alt="Toast">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@product.Name</h5>
+                        <p class="text-success text-left">Skladem @product.Quantity ks</p>
+                        <hr>
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="col d-flex align-items-center justify-content-between flex-row">
+                                <p class="text-danger" style="margin: 0">@product.Price Kč</p>
+                                <a href="#" class="btn rounded-0">Koupit</a>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<style>
+     
+    .input-group-next
+    {
+        padding-left: 1%;
+    }
+     
+    .btn
+    {
+        color: white;
+        background-color: #FF4401  !important;
+    }
+     
+</style>
