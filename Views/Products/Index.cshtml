@@ -3,18 +3,22 @@
     ViewData["Title"] = "Produkty";
 }
 
-<div class="container">
-    <div class="vyhledavaci-lista">
-        <h1 class="text-center">Na co máš chuť?</h1>
-        <div class="input-group mb-3 rounded-0">
-            <input type="text" class="form-control">
-            <div class="input-group-next">
-                <button class="btn rounded-0" type="button">Vyhledat</button>
+<section class="hero">
+    <div class="container">
+        <div class="vyhledavaci-lista">
+            <h1 class="text-center text-white">Na co máš chuť?</h1>
+            <div class="input-group mb-3 rounded-0">
+                <input type="text" class="form-control rounded-0">
+                <div class="input-group-next">
+                    <button class="btn rounded-0" type="button">Vyhledat</button>
+                </div>
             </div>
         </div>
     </div>
+</section>
  
-    <div class="karticka">
+
+<div class="karticka">
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach (var product in Model.Products)
             {
@@ -37,20 +41,41 @@
             }
         </div>
     </div>
-</div>
 
 
 <style>
-     
+    .hero
+    {
+        background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107920424869834812/strawberry-bg.jpg?width=1564&height=1042'); 
+        background-size: cover; 
+        background-position: center; 
+        border-bottom: 6px solid #FF4401;
+        width: 100%; 
+        height: 50vh;
+    }
+    
+    .vyhledavaci-lista
+    {
+        padding-top: 15%;
+    }
+    
     .input-group-next
     {
         padding-left: 1%;
     }
-     
+    
     .btn
     {
         color: white;
         background-color: #FF4401  !important;
+        width: 105px;
+    }
+    
+    .karticka
+    {
+        padding-top: 5%;
+        padding-left: 3%;
+        padding-right: 3%;
     }
      
 </style>

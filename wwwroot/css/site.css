@@ -20,3 +20,66 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Styling for the navigation */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  border-bottom: 6px solid #FF4401;
+  padding: 10px;
+  padding-right: 7%;
+  padding-left: 7%;
+}
+
+/* Styling for the logo */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Styling for the menu */
+.menu {
+  position: relative;
+  background-color: black;
+}
+
+.list
+{
+  color: white;
+}
+
+/* Styling for the dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Styling for the dropdown items */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Styling for the dropdown items on hover */
+.dropdown-content a:hover {
+  background-color: #FF4401;
+}
+
+/* Styling for the dropdown on hover */
+.menu:hover .dropdown-content {
+  display: block;
+}
+
+.logo
+{
+  color: white;
+}
