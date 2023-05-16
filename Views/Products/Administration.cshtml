@@ -1,4 +1,4 @@
-@model DutyFree.Models.AdminViewModel
+@model IEnumerable<ProductModel>
 
 @{
     ViewBag.Title = "Product admin panel";
@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model)
         {
             <tr>
                 <td colspan="2">@product.Name</td>
