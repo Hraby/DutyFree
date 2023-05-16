@@ -93,4 +93,11 @@
             var row = element.parentNode.parentNode;
             row.parentNode.removeChild(row);
         }
+
+    window.onload = function () {
+        var currentDate = new Date().toISOString().slice(0, 10);
+
+        document.getElementById("datumDo").value = currentDate;
+    };
+
     </script>
