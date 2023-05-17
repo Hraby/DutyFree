@@ -1,93 +1,42 @@
 using DutyFree.Models;
-using Microsoft.Extensions.Options;
+using Dapper;
+using System.Data;
+using Npgsql;
 
 namespace DutyFree.Data;
 
-using Dapper;
-using System.Data;
-using System.Configuration;
-using System.Data.SqlClient;
-
 public class Database
 {
-    private static string connectionString;
+    private readonly IDbConnection _connection;
 
-    public static IDbConnection Connection
+    public Database(IDbConnection connection)
     {
-        get
-        {
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-
-                connectionString = configuration.GetConnectionString("DefaultConnection");
-            }
-
-            return new SqlConnection(connectionString);
-        }
-    }
-    
-    public IEnumerable<ProductModel> GetAllProducts()
-    {
-        using (var connection = Database.Connection)
-        {
-            connection.Open();  
-            return connection.Query<ProductModel>("ProcProducts", commandType: CommandType.StoredProcedure);
-        }
+        _connection = connection;
     }
 
-    public void InsertProduct(ProductModel product)
+    public IEnumerable<ProductModel> GetProducts()
     {
-        using (var connection = Database.Connection)
-        {
-            connection.Open();
-            var parameters = new
-            {
-                Name = product.Name,
-                ImageUrl = product.ImageUrl,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
-            connection.Execute("ProcProductInsert", parameters, commandType: CommandType.StoredProcedure);
-        }
+        string query = "EXEC dbo.ProcProduct";
+        return _connection.Query<ProductModel>(query).ToList();
     }
 
-    public void UpdateProduct(ProductModel product)
+    public int InsertProduct(ProductModel product)
     {
-        using (var connection = Database.Connection)
-        {
-            connection.Open();
-            var parameters = new
-            {
-                ProductId = product.ProductId,
-                Name = product.Name,
-                ImageUrl = product.ImageUrl,
-                Quantity = product.Quantity,
-                Price = product.Price,
-                DateUpdated = DateTime.Now,
-                UpdatedBy = product.UpdatedBy
-            };
-            connection.Execute("ProcProductEdit", parameters, commandType: CommandType.StoredProcedure);
-        }
+        string query = "EXEC dbo.ProcProductInsert @Name, @ImageUrl, @Quantity, @Price";
+        return _connection.QuerySingle<int>(query, product);
+    }
+
+    public void EditProduct(ProductModel product)
+    {
+        string query = "EXEC ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
+        _connection.Execute(query, product);
     }
 
     public void DeleteProduct(int productId)
     {
-        using (var connection = Database.Connection)
-        {
-            connection.Open();
-            var parameters = new
-            {
-                ProductId = productId,
-                DateUpdated = DateTime.Now,
-                UpdatedBy = 0,
-                IsDeleted = true
-            };
-            connection.Execute("ProcProductDelete", parameters, commandType: CommandType.StoredProcedure);
-        }
+        string query = "EXEC ProcProductDelete @ProductId";
+        var parameters = new { ProductId = productId };
+        _connection.Execute(query, parameters);
     }
 }
 
