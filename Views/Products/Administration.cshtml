@@ -11,78 +11,163 @@
     </div>
 </section>
 
-<div class="container">
 
+
+<div class="container">
+    <div id="productFormContainer"></div>
 
     <!--Add icon-->
     <div class="addIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" onclick="product_add()" cursor="pointer" width="30" height="30" fill="#FF4401" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="generateProductForm()" cursor="pointer" width="30" height="30" fill="#FF4401" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
         </svg>
     </div>
-
-
-    <div class="container">
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <th colspan="2" class="text-center">Produkt</th>
-                    <th>Obrázek</th>
-                    <th>Cena za ks</th>
-                    <th>Aktuální množství</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model.Products)
-                {
-                    <tr>
-                        <td colspan="2">@product.Name</td>
-                        <td><img src="obrazek1.jpg" alt="Obrázek 1"></td>
-                        <td>@product.Price</td>
-                        <td>@product.Quantity</td>
-                        <td class="buttons" style="display: flex; align-items: center;">
-                            <svg xmlns="http://www.w3.org/2000/svg" onclick="product_edit()" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench" viewBox="0 0 16 16" style="transform: scale(0.8);">
-                                <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" onclick="product_delete()" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" style="width: 25px; height: 25px;">
-                                <path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
 </div>
 
-    <script>
-        // Vytvoření produktu
-        function product_add() {
-            const table = $('table tbody');
-            table.prepend(
-                '<tr>'
-                + '<td class="name">'
-                + '<input type="text" class="form-control" name="Name" placeholder="Název" />'
-                + '</td>'
-                + '<td class="image">'
-                + '<input type="file" class="form-control" name="Image" />'
-                + '</td>'
-                + '<td class="price">'
-                + '<input type="number" class="form-control" name="Price" placeholder="Cena" />'
-                + '</td>'
-                + '<td class="quantity">'
-                + '<input type="number" class="form-control" name="Quantity" />'
-                + '</td>'
-                + '<td class="buttons" style="width: 50px;">'
-                + '<svg xmlns="http://www.w3.org/2000/svg" onclick="product_delete()" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16">'
-                + '<path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"/>'
-                + '</svg>'
-                + '</td>'
-                + '</tr>'
-            );
-        }
+<div class="container">
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center">Produkt</th>
+                <th>Obrázek</th>
+                <th>Cena za ks</th>
+                <th>Aktuální množství</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td colspan="2">@product.Name</td>
+                    <td><img src="obrazek1.jpg" alt="Obrázek 1"></td>
+                    <td>@product.Price</td>
+                    <td>@product.Quantity</td>
+                    <td class="buttons" style="display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick="product_edit()" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench" viewBox="0 0 16 16" style="transform: scale(0.8);">
+                            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick="product_delete()" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" style="width: 25px; height: 25px;">
+                            <path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    // Vytvoření produktu
+    function generateProductForm() {
+        const formContainer = document.getElementById("productFormContainer");
+
+        const form = document.createElement("form");
+        form.classList.add("mt-4");
+
+        const table = document.createElement("table");
+        table.classList.add("table", "table-borderless");
+
+        const tbody = document.createElement("tbody");
+
+        const row1 = createFormRow();
+        const fileInput = createFormInput("produkt", "file");
+        const priceInput = createFormInput("Cena za ks", "number");
+        row1.appendChild(createTableCell(fileInput, 2));
+        row1.appendChild(createTableCell(priceInput));
+
+        const row2 = createFormRow();
+        const quantityInput = createFormInput("Aktuální množství", "number");
+        const categorySelect = createFormSelect("kategorie", ["Vyberte", "#Svačina", "#Sladké", "#Slané", "#Nápoje", "#Zmrzlina"]);
+        row2.appendChild(createTableCell(quantityInput, 2));
+        row2.appendChild(createTableCell(categorySelect));
+
+        const row3 = createFormRow();
+        const noveltyCheckbox = createFormCheckbox("novinka", "Novinka");
+        const discountCheckbox = createFormCheckbox("sleva", "Sleva");
+        row3.appendChild(createTableCell(noveltyCheckbox, 2));
+        row3.appendChild(createTableCell(discountCheckbox));
+
+        const row4 = createFormRow();
+        const saveButton = createFormButton("Uložit", "primary");
+        const discardButton = createFormButton("Zahodit", "secondary");
+        row4.appendChild(createTableCell(saveButton));
+        row4.appendChild(createTableCell(discardButton));
+
+        tbody.appendChild(row1);
+        tbody.appendChild(row2);
+        tbody.appendChild(row3);
+        tbody.appendChild(row4);
+
+        table.appendChild(tbody);
+        form.appendChild(table);
+        formContainer.innerHTML = "";
+        formContainer.appendChild(form);
+    }
+
+    function createFormRow() {
+        const tr = document.createElement("tr");
+        return tr;
+    }
+
+    function createFormInput(name, type) {
+        const input = document.createElement("input");
+        input.classList.add("form-control");
+        input.setAttribute("name", name);
+        input.setAttribute("type", type);
+        input.setAttribute("placeholder", name);
+        return input;
+    }
+
+    function createFormSelect(name, options) {
+        const select = document.createElement("select");
+        select.classList.add("form-select");
+        select.setAttribute("name", name);
+        options.forEach((optionText) => {
+            const option = document.createElement("option");
+            option.setAttribute("value", optionText);
+            option.innerText = optionText;
+            select.appendChild(option);
+        });
+        return select;
+    }
+
+    function createFormCheckbox(name, label) {
+        const div = document.createElement("div");
+        div.classList.add("form-check");
+
+        const checkbox = document.createElement("input");
+        checkbox.classList.add("form-check-input");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", name);
+
+        const checkboxLabel = document.createElement("label");
+        checkboxLabel.classList.add("form-check-label");
+        checkboxLabel.setAttribute("for", name);
+        checkboxLabel.innerText = label;
+
+        div.appendChild(checkbox);
+        div.appendChild(checkboxLabel);
+
+        return div;
+    }
+
+    function createFormButton(label, type) {
+        const button = document.createElement("button");
+        button.classList.add("btn", `btn-${type}`, "me-2");
+        button.setAttribute("type", "submit");
+        button.innerText = label;
+        return button;
+    }
+
+    function createTableCell(content, colspan = 1) {
+        const td = document.createElement("td");
+        td.setAttribute("colspan", colspan);
+        td.appendChild(content);
+        return td;
+    }
 
     // Odstranění produktu
     function product_delete() {
