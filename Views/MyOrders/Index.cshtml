@@ -31,6 +31,14 @@
         </div>
     </section>
 
+    <div class="col-md-6">
+        <div class="form-group">
+            <button type="button" id="filterButton" class="btn btn-primary">Filtrovat</button>
+            <button type="button" id="resetButton" class="btn btn-secondary">Obnovit</button>
+        </div>
+    </div>
+
+
 
     <table class="table">
         <thead>
@@ -149,6 +157,62 @@
 
         updateTotalPrice();
     };
+
+
+
+    // Propojení tlačítka Filter & Reset
+    document.getElementById("filterButton").addEventListener("click", function () {
+        filterOrders();
+    });
+    document.getElementById("resetButton").addEventListener("click", function () {
+        resetOrders();
+    });
+
+
+    // Filtrování objednávek na základě časového rozmezí
+    function filterOrders() {
+        var fromDate = new Date(document.getElementById("datumOd").value);
+        var toDate = new Date(document.getElementById("datumDo").value);
+
+        var tableRows = document.querySelectorAll(".table tbody tr");
+
+        tableRows.forEach(function (row) {
+            var dateCell = row.querySelector("td:first-child");
+            var orderDate = new Date(dateCell.innerText.split(".").reverse().join("-"));
+
+            if (orderDate >= fromDate && orderDate <= toDate) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+
+        updateTotalPrice();
+    }
+
+
+    // Resetování filtru
+    function resetOrders() {
+        var tableRows = document.querySelectorAll(".table tbody tr");
+
+        tableRows.forEach(function (row) {
+            row.style.display = "table-row";
+        });
+
+        updateTotalPrice();
+        
+        // Nastavení prvního dne v měsíci a aktuálního data
+        var currentDate = new Date();
+        currentDate.setDate(1);
+        var firstDayOfMonth = currentDate.toISOString().slice(0, 10);
+
+        document.getElementById("datumOd").value = firstDayOfMonth;
+
+
+        var currentDate = new Date().toISOString().slice(0, 10);
+        document.getElementById("datumDo").value = currentDate;
+    }
+
 </script>
 
 <style>
