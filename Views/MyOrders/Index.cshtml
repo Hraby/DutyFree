@@ -33,8 +33,8 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <button type="button" id="filterButton" class="btn btn-primary">Filtrovat</button>
-            <button type="button" id="resetButton" class="btn btn-secondary">Obnovit</button>
+            <button type="button" id="filterButton" class="btn btn-primary rounded-0">Filtrovat</button>
+            <button type="button" id="resetButton" class="btn btn-secondary rounded-0">Obnovit</button>
         </div>
     </div>
 
@@ -216,10 +216,11 @@
 </script>
 
 <style>
-    ::selection {
+    ::selection
+    {
         background-color: #FF4401;
         color: white;
-    }
+        }
 
     .hero2 {
         background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842');
@@ -237,4 +238,37 @@
     .dates {
         margin-top: 20px;
     }
+    
+    .btn-primary
+           {
+           margin-top: 2%;
+           margin-right: 4%;
+           margin-bottom: 2%;
+               background-color: #FF4401;
+               color: white;
+               border-color: #FF4401;
+               }
+               
+           .btn-primary:hover
+           {
+               background-color: white;
+               color: #FF4401;
+               border-color: #FF4401;
+               } 
+               
+    .btn-secondary
+              {
+                  margin-top: 2%;
+                  margin-bottom: 2%;
+                  background-color: white;
+                  color: #FF4401;
+                  border-color: #FF4401;
+                  }
+                  
+              .btn-secondary:hover
+              {
+                  background-color: #FF4401;
+                  color: white;
+                  border-color: #FF4401;
+                  } 
 </style>
