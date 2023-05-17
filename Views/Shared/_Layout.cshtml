@@ -13,20 +13,31 @@
         <div class="navbar-logo">
           <a class="logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://media.discordapp.net/attachments/1107599847562952794/1108283610026483774/blogic-logo.png?width=2160&height=376" alt="blogic| DutyFree-logo"></a>
         </div>
-        <div class="navbar-menu">
+<div class="navbar-menu">
             <div class="navbar-menu-item">
                 <div class="dropdown">
                     <span>Menu</span>
                     <div class="dropdown-content">
                         <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Produkty</a>
                         <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Administration">Správa produktů</a>
-                        <a class="dropdown-item"  asp-area="" asp-controller="MyOrders" asp-action="Index">Moje objednávky</a>
+                        <a class="dropdown-item"  asp-area="" asp-controller="MyOrders" asp-action="MyOrder">Moje objednávky</a>
                     </div>
                 </div>
+</div>
+        <div class="menu">
+            <div class="list">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            </div>
+            <div class="dropdown-content">
+                <a asp-area="" asp-controller="Products" asp-action="Index">Produkty</a>
+                <a asp-area="" asp-controller="Products" asp-action="Administration">Správa produktů</a>
+                <a asp-area="" asp-controller="MyOrders" asp-action="MyOrder">Moje objednávky</a>
             </div>
         </div>
     </div>
-
+</div>
 <div class="container-fluid" style="padding: 0">
     <main role="main">
         @RenderBody()
