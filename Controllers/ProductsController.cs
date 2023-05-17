@@ -18,7 +18,7 @@ public class ProductsController : Controller
     public IActionResult Administration()
     {
         IEnumerable<ProductModel> products = _database.GetProducts();
-        return View("Administration", products);
+        return View("Administration", new AdminViewModel(){Products = products.ToList()});
     }
     
     public IActionResult Index()
