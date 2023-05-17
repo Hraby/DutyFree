@@ -27,13 +27,13 @@ public class Database
 
     public void EditProduct(ProductModel product)
     {
-        string query = "EXEC ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
+        string query = "EXEC dbo.ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
         _connection.Execute(query, product);
     }
 
     public void DeleteProduct(int productId)
     {
-        string query = "EXEC ProcProductDelete @ProductId";
+        string query = "EXEC dbo.ProcProductDelete @ProductId";
         var parameters = new { ProductId = productId };
         _connection.Execute(query, parameters);
     }
