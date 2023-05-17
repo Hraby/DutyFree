@@ -1,6 +1,7 @@
 using DutyFree.Models;
 using Dapper;
 using System.Data;
+using DutyFree.Controllers;
 
 namespace DutyFree.Data;
 
@@ -27,6 +28,7 @@ public class Database
 
     public void EditProduct(ProductModel product)
     {
+
         string query = "EXEC dbo.ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
         _connection.Execute(query, product);
     }
