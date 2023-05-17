@@ -3,4 +3,77 @@
     ViewData["Title"] = "Produkty";
 }
 
-<h1 class="text-center">DutyFree</h1>
+
+<section class="hero">
+    <div class="container-login">
+        <img src="https://media.discordapp.net/attachments/1107599847562952794/1108283610026483774/blogic-logo.png?width=2160&height=376" alt="Blogic|DutyFree-logo">
+        <hr>
+        <button _ngcontent-c0="" class="btn btn-success red-custom-background-color white-custom" type="button">Přihlásit se</button>
+    </div>
+    </section>
+
+<style>
+
+    .hero
+    {
+         background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842');
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 100vh;
+                }
+                
+    .container-login
+    {
+            position: absolute;
+            top: calc(50% - 50px);
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            text-align: center;
+            }
+    .container-login img
+    {
+        width: 100%;
+        height: auto;
+        min-width: 290px;
+       padding-top: 10%;
+    }
+    
+    .container-login[_ngcontent-c0] hr[_ngcontent-c0] 
+    {
+        background-color: #fff;
+    }
+    
+    hr
+    {
+        color: white;
+        border: 1px solid red;
+    }
+    
+    .btn-success 
+    {
+        color: #fff;
+        background-color: #ff4500;
+    }
+    
+    .btn, .btn-success 
+    {
+        border-color: #ff4500;
+    }
+    
+    .btn
+    {
+         border-radius: 0;
+        width: 120px;
+        transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        
+    .btn:hover
+    {
+        background-color: white;
+        color: #ff4500;
+        border-color: #ff4500;
+        }
+    
+</style>
