@@ -1,6 +1,6 @@
 namespace DutyFree.Models;
 
-public class Product
+public class ProductModel
 {
     public int ProductId { get; set; }
     public DateTime DateCreate { get; set; }

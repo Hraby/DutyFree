@@ -2,5 +2,5 @@ namespace DutyFree.Models;
 
 public class AdminViewModel
 {
-    public List<Product> Products { get; set; }
+    public List<ProductModel> Products { get; set; }
 }
