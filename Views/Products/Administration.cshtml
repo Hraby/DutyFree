@@ -5,7 +5,9 @@
     Layout = "_Layout";
 }
 <div class="container">
-    <button onclick="product_add()" id="product-add">Přidat položku</button>
+    <button type="button" class="btn btn-outline-warning">
+    <i class="fas fa-plus"></i> Přidat
+  </button>
     <table class="table">
         <thead>
         <tr>
@@ -29,6 +31,7 @@
         </tbody>
     </table>
 </div>
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
 
 <script>
     function product_add() {
