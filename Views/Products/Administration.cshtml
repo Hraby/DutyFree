@@ -92,7 +92,7 @@
 
         const row4 = createFormRow();
         const saveButton = createFormButton("Uložit", "primary");
-        const discardButton = createFormButton("Zahodit", "secondary");
+        const discardButton = createFormButton2("Zahodit", "secondary");
         row4.appendChild(createTableCell(saveButton));
         row4.appendChild(createTableCell(discardButton));
 
@@ -114,7 +114,7 @@
 
     function createFormInput(name, type) {
         const input = document.createElement("input");
-        input.classList.add("form-control");
+        input.classList.add("form-control", "rounded-0");
         input.setAttribute("name", name);
         input.setAttribute("type", type);
         input.setAttribute("placeholder", name);
@@ -123,7 +123,7 @@
 
     function createFormSelect(name, options) {
         const select = document.createElement("select");
-        select.classList.add("form-select");
+        select.classList.add("form-select", "rounded-0");
         select.setAttribute("name", name);
         options.forEach((optionText) => {
             const option = document.createElement("option");
@@ -136,15 +136,15 @@
 
     function createFormCheckbox(name, label) {
         const div = document.createElement("div");
-        div.classList.add("form-check");
+        div.classList.add("form-check", "rounded-0");
 
         const checkbox = document.createElement("input");
-        checkbox.classList.add("form-check-input");
+        checkbox.classList.add("form-check-input", "rounded-0");
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", name);
 
         const checkboxLabel = document.createElement("label");
-        checkboxLabel.classList.add("form-check-label");
+        checkboxLabel.classList.add("form-check-label", "rounded-0");
         checkboxLabel.setAttribute("for", name);
         checkboxLabel.innerText = label;
 
@@ -156,11 +156,19 @@
 
     function createFormButton(label, type) {
         const button = document.createElement("button");
-        button.classList.add("btn", `btn-${type}`, "me-2");
+        button.classList.add("btn", `btn-${type}`, "me-2", "tlacitko1");
         button.setAttribute("type", "submit");
         button.innerText = label;
         return button;
     }
+    
+     function createFormButton2(label, type) {
+            const button = document.createElement("button");
+            button.classList.add("btn", `btn-${type}`, "me-2", "tlacitko2");
+            button.setAttribute("type", "submit");
+            button.innerText = label;
+            return button;
+        }
 
     function createTableCell(content, colspan = 1) {
         const td = document.createElement("td");
@@ -187,6 +195,7 @@
 
 
 <style>
+    
     .addIcon {
         margin-top: 20px;
         margin-left: 87%;
@@ -205,5 +214,34 @@
     h1 {
         padding-top: 9%;
     }
+    
+    .tlacitko1
+           {
+               background-color: #FF4401;
+               color: white;
+               border-color: #FF4401;
+               border-radius: 0;
+               }
+               
+               .tlacitko1:hover
+                      {
+                          background-color: white;
+                          color: #FF4401;
+                          border-color: #FF4401;
+                          }  
 
+     .tlacitko2
+               {
+                   background-color: white;
+                   color: #FF4401;
+                   border-color: #FF4401;
+                   border-radius: 0;
+                   }
+                   
+                   .tlacitko2:hover
+                          {
+                              background-color: #FF4401;
+                              color: white;
+                              border-color: white;
+                              }  
 </style>
