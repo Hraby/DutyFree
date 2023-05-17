@@ -13,22 +13,23 @@
 
 
 <div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="datumOd">Datum (od)</label>
-                    <input type="date" id="datumOd" name="datumOd" class="form-control" lang="cs">
+        <section class="dates">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="datumOd">Datum (od)</label>
+                        <input type="date" id="datumOd" name="datumOd" class="form-control" lang="cs">
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="datumDo">Datum (do)</label>
+                        <input type="date" id="datumDo" name="datumDo" class="form-control" lang="cs">
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6"></div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="datumDo">Datum (do)</label>
-                    <input type="date" id="datumDo" name="datumDo" class="form-control" lang="cs">
-                </div>
-            </div>
-        </div>
+        </section>
 
 
         <table class="table">
@@ -83,7 +84,6 @@
                 </tr>
             </tfoot>
         </table>
-    </div>
 </div>
 
 <script>
@@ -102,7 +102,7 @@
 
 <style>
     .hero2 {
-        background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107920424869834812/strawberry-bg.jpg?width=1564&height=1042');
+        background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842');
         background-size: cover;
         background-position: center;
         border-bottom: 6px solid #FF4401;
@@ -111,6 +111,10 @@
     }
 
     h1 {
-        padding-top: 10%;
+        padding-top: 9%;
+    }
+
+    .dates {
+        margin-top: 20px;
     }
 </style>
