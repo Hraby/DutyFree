@@ -16,34 +16,35 @@
         </div>
     </div>
 </section>
- 
 
 <div class="karticka">
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-            @foreach (var product in Model.Products)
-            {
+          
             <div class="col">
                 <div class="card">
-                    <img src="@product.Image" class="card-img-top" alt="@product.Name">
                     <div class="card-body">
-                        <h5 class="card-title text-center">@product.Name</h5>
-                        <p class="text-success text-left">Skladem @product.Quantity ks</p>
+                        <h5 class="card-title text-center">Name</h5>
+                        <p class="text-success text-left">Skladem Quantity ks</p>
                         <hr>
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="col d-flex align-items-center justify-content-between flex-row">
-                                <p class="text-danger" style="margin: 0">@product.Price Kč</p>
+                                <p class="text-danger" style="margin: 0">Price Kč</p>
                                 <a href="#" class="btn rounded-0">Koupit</a>
                             </div>    
                         </div>
                     </div>
                 </div>
             </div>
-            }
+            
         </div>
     </div>
 
-
 <style>
+    ::selection {
+        background-color: #FF4401;
+        color: white;
+    }
+
     .hero
     {
         background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842'); 
@@ -64,6 +65,22 @@
         padding-left: 1%;
     }
     
+    .card
+    {
+        width: 300px;
+        height: 300px;
+    }
+    
+    
+    .card img
+    {
+    padding-top: 10%;
+    padding-left: 30%;
+    padding-right: 30%;
+         width: 100%;
+        height: 200px;
+        }
+    
    .btn
        {
            background-color: #FF4401;
@@ -83,6 +100,7 @@
         padding-top: 5%;
         padding-left: 3%;
         padding-right: 3%;
+        padding-bottom: 5%;
     }
      
 </style>
