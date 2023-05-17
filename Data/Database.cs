@@ -1,22 +1,41 @@
-namespace DutyFree.Data;
-
+using DutyFree.Models;
 using Dapper;
 using System.Data;
-using System.Configuration;
-using System.Data.SqlClient;
+
+namespace DutyFree.Data;
 
 public class Database
 {
-    private readonly IConfiguration _configuration;
+    private readonly IDbConnection _connection;
 
-    public Database(IConfiguration configuration)
+    public Database(IDbConnection connection)
     {
-        _configuration = configuration;
+        _connection = connection;
     }
 
-    public IDbConnection GetDbConnection()
+    public IEnumerable<ProductModel> GetProducts()
     {
-        return new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        string query = "EXEC dbo.ProcProduct";
+        return _connection.Query<ProductModel>(query).ToList();
+    }
+
+    public int InsertProduct(ProductModel product)
+    {
+        string query = "EXEC dbo.ProcProductInsert @Name, @ImageUrl, @Quantity, @Price";
+        return _connection.QuerySingle<int>(query, product);
+    }
+
+    public void EditProduct(ProductModel product)
+    {
+        string query = "EXEC ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
+        _connection.Execute(query, product);
+    }
+
+    public void DeleteProduct(int productId)
+    {
+        string query = "EXEC ProcProductDelete @ProductId";
+        var parameters = new { ProductId = productId };
+        _connection.Execute(query, parameters);
     }
 }
 
