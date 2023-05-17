@@ -6,7 +6,7 @@
 <section class="hero">
     <div class="container">
         <div class="vyhledavaci-lista">
-            <h1 class="text-center text-white">Na co máš chuť?</h1>
+            <h1 class="text-center text-white">Na co máš chuť ?</h1>
             <div class="input-group mb-3 rounded-0">
                 <input type="text" class="form-control rounded-0">
                 <div class="input-group-next">
@@ -17,27 +17,30 @@
     </div>
 </section>
 
+<section class="container-lg">
 <div class="karticka">
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-          
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Name</h5>
-                        <p class="text-success text-left">Skladem Quantity ks</p>
-                        <hr>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="col d-flex align-items-center justify-content-between flex-row">
-                                <p class="text-danger" style="margin: 0">Price Kč</p>
-                                <a href="#" class="btn rounded-0">Koupit</a>
-                            </div>    
+            @foreach(var product in Model.Products)
+            {
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@product.Name</h5>
+                            <p class="text-success text-left">Skladem @product.Quantity ks</p>
+                            <hr>
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col d-flex align-items-center justify-content-between flex-row">
+                                    <p class="text-danger" style="margin: 0">@product.Price Kč</p>
+                                    <a href="#" class="btn rounded-0">Koupit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            }
         </div>
     </div>
+</section>
 
 <style>
     ::selection {

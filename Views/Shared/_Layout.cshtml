@@ -9,24 +9,21 @@
     <link rel="stylesheet" href="~/DutyFree.styles.css" asp-append-version="true"/>
 </head>
 <body>
-
-<div class="navigation">
-    <div class="logo">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://media.discordapp.net/attachments/1107599847562952794/1108283610026483774/blogic-logo.png?width=2160&height=376" alt="blogic| DutyFree-logo"></a>
-        </div>
-        <div class="menu">
-            <div class="list">
-            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-            </div>
-            <div class="dropdown-content">
-                <a asp-area="" asp-controller="Products" asp-action="Index">Produkty</a>
-                <a asp-area="" asp-controller="Products" asp-action="Administration">Správa produktů</a>
-                <a asp-area="" asp-controller="MyOrders" asp-action="MyOrder">Moje objednávky</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-lg">
+            <a class="logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://media.discordapp.net/attachments/1107599847562952794/1108283610026483774/blogic-logo.png?width=2160&height=376" alt="blogic| DutyFree-logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Produkty</a>
+                    <a asp-area="" asp-controller="Products" asp-action="Administration" class="nav-link">Správa produktů</a>
+                    <a asp-area="" asp-controller="MyOrders" asp-action="MyOrder" class="nav-link">Moje objednávky</a>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
 <div class="container-fluid" style="padding: 0">
     <main role="main">
@@ -34,9 +31,9 @@
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
+<footer class="footer text-white bg-black">
     <div class="container">
-        &copy; 2023 - <a asp-area="" asp-controller="Home" asp-action="Index">DutyFree</a>
+        &copy; 2023 - <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white">DutyFree</a>
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
