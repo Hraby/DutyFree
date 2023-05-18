@@ -62,21 +62,21 @@
 <script>
     var emptyNewRow = "<tr class='trNewRow'>";
     emptyNewRow = emptyNewRow + '<td class="tdName">'
-    emptyNewRow = emptyNewRow + '<input type="text" class="form-control name" placeholder="Název" name="Name" />'
+    emptyNewRow = emptyNewRow + '<input type="text" class="form-control name rounded-0" placeholder="Název" name="Name" />'
     emptyNewRow = emptyNewRow + '</td>'
     emptyNewRow = emptyNewRow + '<td class="tdImage">'
-    emptyNewRow = emptyNewRow + '<input type="file" class="form-control image" name="Image" />'
+    emptyNewRow = emptyNewRow + '<input type="file" class="form-control image rounded-0" name="Image" />'
     emptyNewRow = emptyNewRow + '</td>'
     emptyNewRow = emptyNewRow + '<td class="tdPrice">'
-    emptyNewRow = emptyNewRow + '<input type="number" class="form-control price" name="Price" />'
+    emptyNewRow = emptyNewRow + '<input type="number" class="form-control price rounded-0" name="Price" />'
     emptyNewRow = emptyNewRow + '</td>'
     emptyNewRow = emptyNewRow + '</td>'
     emptyNewRow = emptyNewRow + '<td class="tdQuantity">'
-    emptyNewRow = emptyNewRow + '<input type="number" class="form-control quantity" name="Quantity" />'
+    emptyNewRow = emptyNewRow + '<input type="number" class="form-control quantity rounded-0" name="Quantity" />'
     emptyNewRow = emptyNewRow + '</td>'
     emptyNewRow = emptyNewRow + "    <td class='tdAction d-flex justify-content-evenly'>";
-    emptyNewRow = emptyNewRow + "        <button class='btn btn-sm btn-success btn-save'>Uložit</button>";
-    emptyNewRow = emptyNewRow + "        <button class='btn btn-sm btn-success btn-cancel'>Zahodit</button>";
+    emptyNewRow = emptyNewRow + "        <button class='btn btn-success btn-save'>Uložit</button>";
+    emptyNewRow = emptyNewRow + "        <button class='btn btn-success btn-cancel'>Zahodit</button>";
     emptyNewRow = emptyNewRow + "    </td>";
     emptyNewRow = emptyNewRow + "</tr>";
 
@@ -114,16 +114,16 @@
 
         $('table tbody').on('click', '.btn-edit', function () {
             const name = $(this).parent().parent().find(".tdName").html();
-            $(this).parent().parent().find(".tdName").html("<input type='text' value='" + name + "' class='form-control name' placeholder='Název'/>");
+            $(this).parent().parent().find(".tdName").html("<input type='text' value='" + name + "' class='form-control name rounded-0der='Název'/>");
 
             const image = $(this).parent().parent().find(".tdImage").html();
-            $(this).parent().parent().find(".tdImage").html("<input type='file' value='" + image + "' class='form-control image'/>");
+            $(this).parent().parent().find(".tdImage").html("<input type='file' value='" + image + "' class='form-control image rounded-0'/>");
 
             const price = $(this).parent().parent().find(".tdPrice").html();
-            $(this).parent().parent().find(".tdPrice").html("<input type='number' value='" + price + "' class='form-control price'/>");
+            $(this).parent().parent().find(".tdPrice").html("<input type='number' value='" + price + "' class='form-control price rounded-0'/>");
             
             const quantity = $(this).parent().parent().find(".tdQuantity").html();
-            $(this).parent().parent().find(".tdQuantity").html("<input type='number' value='" + quantity + "' class='form-control quantity'/>");
+            $(this).parent().parent().find(".tdQuantity").html("<input type='number' value='" + quantity + "' class='form-control quantity rounded-0'/>");
             
             $(this).parent().parent().find(".tdAction").html(rowUpdateButtons);
 
@@ -161,7 +161,7 @@
         padding-top: 9%;
     }
     
-    .tlacitko1
+    .btn-save
            {
                background-color: #FF4401;
                color: white;
@@ -169,14 +169,14 @@
                border-radius: 0;
                }
                
-               .tlacitko1:hover
+               .btn-save:hover
                       {
                           background-color: white;
                           color: #FF4401;
                           border-color: #FF4401;
                           }  
 
-     .tlacitko2
+     .btn-cancel
                {
                    background-color: white;
                    color: #FF4401;
@@ -184,7 +184,7 @@
                    border-radius: 0;
                    }
                    
-                   .tlacitko2:hover
+                   .btn-cancel:hover
                           {
                               background-color: #FF4401;
                               color: white;
