@@ -8,24 +8,42 @@
 </section>
 
 <div class="container">
-    
-    <form>
-        <div class="form-group">
-            <label for="exampleInputText1">Jméno:</label>
-            <input type="text" class="form-control rounded-0" id="exampleInputText1" aria-describedby="TextHelp">
+    <div class="tabulka">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Název</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Filip Dlouhý</td>
+            <td>filip.dlouhy@gmail.com</td>
+            <td>Admin</td>
+            <td><button type="button" id="filterButton" class="btn btn-sm btn-primary rounded-0">Přihlásit se</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Tereza Nová</td>
+            <td>t.nova@seznam.cz</td>
+            <td>User</td>
+            <td><button type="button" id="filterButton" class="btn btn-sm btn-primary rounded-0">Přihlásit se</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Petr Mrázek</td>
+            <td>petrmrazek@email.cz</td>
+            <td>User</td>
+            <td><button type="button" id="filterButton" class="btn btn-sm btn-primary rounded-0">Přihlásit se</button></td>
+        </tr>
+        </tbody>
+    </table>
         </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">E-mail:</label>
-            <input type="email" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Profilový obrázek:</label>
-            <input type="file" class="form-control rounded-0" id="exampleFormControlFile1">
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary rounded-0">Odeslat</button>
-        </div>
-    </form>
 </div>
 
 <style>
@@ -33,6 +51,11 @@
         background-color: #FF4401;
         color: white;
     }
+    
+     .tabulka
+        {
+            padding-top: 5%;
+            }
 
     .hero
     {
@@ -47,20 +70,6 @@
     {
         color: white;
         padding-top: 7%;
-        }
-        
-     form
-     {
-        padding-top: 4%
-        }
-       
-        
-    .form-group
-    {
-        text-align: center;
-        padding-top: 3%;
-        padding-left: 25%;
-        padding-right: 25%;
         }
         
     .btn
