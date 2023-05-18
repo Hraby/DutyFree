@@ -4,11 +4,16 @@ using DutyFree.Models;
 
 namespace DutyFree.Controllers;
 
-public class MyOrders : Controller
+public class MyOrdersController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public IActionResult MyOrder()
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult Administration()
     {
         return View();
     }

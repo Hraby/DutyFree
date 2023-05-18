@@ -11,8 +11,12 @@ x# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,macos,w
 *.userosscache
 *.sln.docstates
 
+.vscode
+bin
+obj
+*.db
 appsettings.json
-appsettings.Development.json
+wwwroot
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
