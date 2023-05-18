@@ -27,6 +27,11 @@ public class ProductsController : Controller
         return View("Index", new AdminViewModel() { Products = products.ToList() });
     }
 
+    public IActionResult OrderViewAdmin()
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult Create(ProductModel product)
     {
