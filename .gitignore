@@ -1,4 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,macos,windows,csharp
+x# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,macos,windows,csharp
 # Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore,macos,windows,csharp
 
 ### ASPNETCore ###
@@ -10,6 +10,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+
+appsettings.json
+appsettings.Development.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
