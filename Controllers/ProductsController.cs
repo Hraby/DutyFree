@@ -15,11 +15,7 @@ public class ProductsController : Controller
         _database = database;
     }
 
-    public IActionResult Administration()
-    {
-        IEnumerable<ProductModel> products = _database.GetProducts();
-        return View("Administration", new AdminViewModel(){Products = products.ToList()});
-    }
+    
     
     public IActionResult Index()
     {
@@ -27,10 +23,7 @@ public class ProductsController : Controller
         return View("Index", new AdminViewModel() { Products = products.ToList() });
     }
 
-    public IActionResult OrderViewAdmin()
-    {
-        return View();
-    }
+    
 
     [HttpPost]
     public IActionResult Create(ProductModel product)
