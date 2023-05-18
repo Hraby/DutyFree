@@ -12,10 +12,54 @@
 </section>
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="profile-picture">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile picture">
+            </div>
+        </div>
+        <div class="col-sm">
+            <h2>Petr Mrázek</h2>
+            <h3>uzivatel@email.neco</h3>
+        </div>
+    </div>
+</div>
 
-
-
-
+<div class="container">
+    <div class="tabulka">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Produkt</th>
+            <th scope="col">Datum a čas</th>
+            <th scope="col">Množství</th>
+            <th scope="col">Cena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Pepsi</td>
+            <td>1. 4. 2023</td>
+            <td>5 ks</td>
+            <td>135 Kč</td>
+        </tr>
+        <tr>
+            <td>Toast</td>
+            <td>18. 3. 2023</td>
+            <td>4 ks</td>
+            <td>60 Kč</td>
+        </tr>
+        <tr>
+            <td>Corny</td>
+            <td>9. 1. 2023</td>
+            <td>1 ks</td>
+            <td>17 Kč</td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+</div>
 
 
 <style>
@@ -24,11 +68,32 @@
         color: white;
     }
     
-    .addIcon {
-        margin-top: 20px;
-        margin-left: 87%;
-    }
+    .profile-picture img
+    {
+        width: 175px;
+        height: 175px;
+        margin-top: 5%;
+        }
+        
+    .col-sm h2
+    {
+        margin-left: -50%;
+        margin-top: 10%;
+        font-size: 50px;
+        }
+                
+    .col-sm h3
+    {
+        margin-left: -50%;
+        margin-top: 2%;
+        font-weight: lighter;
+        font-size: 35px;
+        }
 
+    .tabulka
+    {
+        padding-top: 5%;
+        }
 
     .hero2 {
         background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842');
@@ -42,34 +107,4 @@
     h1 {
         padding-top: 9%;
     }
-    
-    .btn-save
-           {
-               background-color: #FF4401;
-               color: white;
-               border-color: #FF4401;
-               border-radius: 0;
-               }
-               
-               .btn-save:hover
-                      {
-                          background-color: white;
-                          color: #FF4401;
-                          border-color: #FF4401;
-                          }  
-
-     .btn-cancel
-               {
-                   background-color: white;
-                   color: #FF4401;
-                   border-color: #FF4401;
-                   border-radius: 0;
-                   }
-                   
-                   .btn-cancel:hover
-                          {
-                              background-color: #FF4401;
-                              color: white;
-                              border-color: white;
-                              }  
 </style>
