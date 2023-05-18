@@ -17,7 +17,7 @@ public class Database
     public IEnumerable<ProductModel> GetProducts()
     {
         string query = "exec dbo.ProcProducts";
-        return _connection.Query<ProductModel>(query);
+        return _connection.Query<ProductModel>(query).ToList();
     }
 
     public int InsertProduct(ProductModel product)

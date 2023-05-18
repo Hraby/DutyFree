@@ -23,9 +23,8 @@ public class ProductsController : Controller
     
     public IActionResult Index()
     {
-        // IEnumerable<ProductModel> products = _database.GetProducts();
-        // return View("Index", new AdminViewModel(){Products = products.ToList()});
-        return View();
+        IEnumerable<ProductModel> products = _database.GetProducts();
+        return View("Index", new AdminViewModel() { Products = products.ToList() });
     }
 
     [HttpPost]
