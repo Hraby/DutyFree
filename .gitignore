@@ -581,3 +581,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,macos,windows,csharp
+appsettings.json
