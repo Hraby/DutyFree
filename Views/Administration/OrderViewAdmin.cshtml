@@ -6,15 +6,51 @@
 }
 
 <section class="hero2">
-    <h1 class="display-4 text-white text-center"><strong>Zobrazení objednávek - Admin</strong></h1>
+    <h1 class="display-4 text-white text-center"><strong>Historie objednávek</strong></h1>
 </section>
 
 
-<script>
-    
-</script>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Jméno</th>
+                <th scope="col">Datum a čas</th>
+                <th scope="col">Produkt</th>
+                <th scope="col">Počet</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td><a href="#">Mark</a></td>
+                <td>18.  5. 2023</td>
+                <td>Pepsi</td>
+                <td>2 ks</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td><a href="#">Jacob</a></td>
+                <td>18.  5. 2023</td>
+                <td>Pepsi</td>
+                <td>1 ks</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <style>
+    ::selection {
+        background-color: #FF4401;
+        color: white;
+    }
+
+    .container {
+        margin-top: 2%;
+    }
+
     .hero2 {
             background-image: url('https://media.discordapp.net/attachments/1107599847562952794/1107974604867244072/photo-login.png?width=1600&height=842');
             background-size: cover;
