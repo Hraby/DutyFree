@@ -15,72 +15,51 @@ public class ProductsController : Controller
         _database = database;
     }
 
+    [HttpGet]
     public IActionResult Administration()
     {
         IEnumerable<ProductModel> products = _database.GetProducts();
         return View("Administration", new AdminViewModel(){Products = products.ToList()});
     }
     
+    
     public IActionResult Index()
     {
         IEnumerable<ProductModel> products = _database.GetProducts();
         return View("Index", new AdminViewModel() { Products = products.ToList() });
     }
+    
 
     [HttpPost]
-    public IActionResult Create(ProductModel product)
+    public JsonResult Insert(ProductModel product)
     {
-        if (ModelState.IsValid)
-        {
-            string imageFileName = UploadImage(product.Image);
+        string name = product.Name;
+        int price = product.Price;
+        int quantity = product.Quantity;
+        _database.InsertProduct(name, price, quantity);
 
-            _database.InsertProduct(product);
-
-            return RedirectToAction("Index");
-        }
-
-        return View("Administration");
+        return Json(new { success = true, message = "Produkt byl úspěšně přidán do databáze" });
     }
 
     [HttpPut]
-    public IActionResult Edit(ProductModel product)
+    public JsonResult Edit(ProductModel product)
     {
-        // if (ModelState.IsValid)
-        // {
-        //     string imageFileName = null;
-        //     if (product.Image != null)
-        //     {
-        //         imageFileName = UploadImage(product.Image);
-        //     }
-        //
-        //     _database.EditProduct(product);
-        //
-        //     return RedirectToAction("Index");
-        // }
+        int id = product.ProductId;
+        string name = product.Name;
+        int price = product.Price;
+        int quantity = product.Quantity;
+        _database.EditProduct(id, name, price, quantity);
 
-        return View("Administration");
+        return Json(new {success = true, message = "Produkt byl úspěšně editován v databázi"});
     }
 
     [HttpDelete]
-    public IActionResult Delete(int id)
+    public JsonResult Delete(ProductModel product)
     {
+        int id = product.ProductId;
         _database.DeleteProduct(id);
-        return Ok();
-    }
 
-    private string UploadImage(IFormFile image)
-    {
-        // if (image != null && image.Length > 0)
-        // {
-        //     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-        //     var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", fileName);
-        //     using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //     {
-        //         image.CopyTo(fileStream);
-        //     }
-        //     return fileName;
-        // }
-        return null;
+        return Json(new { success = true, message = "Produkt byl odebrán z databáze" });
     }
 
 }

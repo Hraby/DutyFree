@@ -27,33 +27,34 @@
 <div class="container">
     <table class="table table-borderless">
         <thead>
-            <tr>
-                <th class="text-center">Produkt</th>
-                <th>Obrázek</th>
-                <th>Cena za ks</th>
-                <th>Aktuální množství</th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th class="text-center">Produkt</th>
+            <th>Obrázek</th>
+            <th>Cena za ks</th>
+            <th>Aktuální množství</th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model.Products)
-            {
-                <tr>
-                    <td class="tdName">@product.Name</td>
-                    <td class="tdImage"><img src="obrazek1.jpg" alt="Obrázek 1"></td>
-                    <td class="tdPrice">@product.Price</td>
-                    <td class="tdQuantity">@product.Quantity</td>
-                    <td class="buttons tdAction" style="display: flex; justify-content: space-evenly;">
-                        <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8);">
-                            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;">
-                            <path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </td>
-                </tr>
-            }
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td class="tdName">@product.Name</td>
+                <td class="tdImage"><img src="obrazek1.jpg" alt="Obrázek 1"></td>
+                <td class="tdPrice">@product.Price</td>
+                <td class="tdQuantity">@product.Quantity</td>
+                <input type="hidden" name="MaxPrice" value="@product.ProductId"/>
+                <td class="buttons tdAction" style="display: flex; justify-content: space-evenly;">
+                    <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8);">
+                        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;">
+                        <path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
@@ -61,30 +62,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     var emptyNewRow = "<tr class='trNewRow'>";
-    emptyNewRow = emptyNewRow + '<td class="tdName">'
-    emptyNewRow = emptyNewRow + '<input type="text" class="form-control name" placeholder="Název" name="Name" />'
-    emptyNewRow = emptyNewRow + '</td>'
-    emptyNewRow = emptyNewRow + '<td class="tdImage">'
-    emptyNewRow = emptyNewRow + '<input type="file" class="form-control image" name="Image" />'
-    emptyNewRow = emptyNewRow + '</td>'
-    emptyNewRow = emptyNewRow + '<td class="tdPrice">'
-    emptyNewRow = emptyNewRow + '<input type="number" class="form-control price" name="Price" />'
-    emptyNewRow = emptyNewRow + '</td>'
-    emptyNewRow = emptyNewRow + '</td>'
-    emptyNewRow = emptyNewRow + '<td class="tdQuantity">'
-    emptyNewRow = emptyNewRow + '<input type="number" class="form-control quantity" name="Quantity" />'
-    emptyNewRow = emptyNewRow + '</td>'
-    emptyNewRow = emptyNewRow + "    <td class='tdAction d-flex justify-content-evenly'>";
-    emptyNewRow = emptyNewRow + "        <button class='btn btn-sm btn-success btn-save'>Uložit</button>";
-    emptyNewRow = emptyNewRow + "        <button class='btn btn-sm btn-success btn-cancel'>Zahodit</button>";
-    emptyNewRow = emptyNewRow + "    </td>";
-    emptyNewRow = emptyNewRow + "</tr>";
+    emptyNewRow += '<td class="tdName">';
+    emptyNewRow += '<input type="text" class="form-control name" placeholder="Název" name="Name" />';
+    emptyNewRow += '</td>';
+    emptyNewRow += '<td class="tdImage">';
+    emptyNewRow += '<input type="file" class="form-control image" name="Image" />';
+    emptyNewRow += '</td>';
+    emptyNewRow += '<td class="tdPrice">';
+    emptyNewRow += '<input type="number" class="form-control price" name="Price" />';
+    emptyNewRow += '</td>';
+    emptyNewRow += '<td class="tdQuantity">';
+    emptyNewRow += '<input type="number" class="form-control quantity" name="Quantity" />';
+    emptyNewRow += '</td>';
+    emptyNewRow += '<td class="tdAction d-flex justify-content-evenly">';
+    emptyNewRow += '    <button type="submit" class="btn btn-sm btn-success btn-save" asp-controller="Products" asp-action="Insert">Uložit</button>';
+    emptyNewRow += '    <button class="btn btn-sm btn-success btn-cancel">Zahodit</button>';
+    emptyNewRow += '</td>';
+    emptyNewRow += '</tr>';
 
-    var rowButtons = "<svg xmlns='http://www.w3.org/2000/svg' cursor = 'pointer' width = '25' height = '25' fill = '#FF4401' class='bi bi - wrench btn-edit' viewBox = '0 0 16 16' style = 'transform: scale(0.8)' > <path d = 'M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z'> </path> </svg> <svg xmlns='http://www.w3.org/2000/svg' cursor = 'pointer' width = '25' height = '25' fill = '#FF4401' class='bi bi - x btn-delete' viewBox = '0 0 16 16' style = 'width: 25px; height: 25px; ' > <path d = 'M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z'></path> </svg>";
-    var rowUpdateButtons = "<button class='btn btn-success btn-sm btn-save' > Uložit </button>  <button class='btn btn-danger btn-sm btn-save' > Zahodit </button> ";
+    var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe>';
+    var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-sm btn-save" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-sm btn-save">Zahodit</button>';
 
-    $( document).ready(function () {
-
+    $(document).ready(function () {
         $("#btnAdd").click(function () {
             if ($("table tbody").children().children().length == 1) {
                 $("table tbody").html("");
@@ -94,16 +93,36 @@
 
         $('table tbody').on('click', '.btn-save', function () {
             const name = $(this).parent().parent().find(".name").val();
-            $(this).parent().parent().find(".tdName").html("" + name + "");
+            $(this).parent().parent().find(".tdName").html(name);
             const image = $(this).parent().parent().find(".image").val();
-            $(this).parent().parent().find(".tdImage").html("" + image + "");
+            $(this).parent().parent().find(".tdImage").html(image);
             const price = $(this).parent().parent().find(".price").val();
-            $(this).parent().parent().find(".tdPrice").html("" + price + "");
+            $(this).parent().parent().find(".tdPrice").html(price);
             const quantity = $(this).parent().parent().find(".quantity").val();
-            $(this).parent().parent().find(".tdQuantity").html("" + quantity + "");
+            $(this).parent().parent().find(".tdQuantity").html(quantity);
             $(this).parent().parent().find(".tdAction").html(rowButtons);
+            
+            var f = {};
+            var data = { name: name, price: price, quantity: quantity };
+            console.log(name, price, quantity)
+            f.url = '@Url.Action("Insert", "Products")';
+            f.type = "POST";
+            f.dataType = "json";
+            f.data = $.param(data);
+            f.contentType = "application/x-www-form-urlencoded";
+            f.success = function (response) {
+                if (response.success) {
+                    console.log("success: " + response.message);
+                } else {
+                    console.log("failed");
+                }
+            };
+            f.error = function (response) {
+                console.log("failed");
+            };
+            $.ajax(f);
         });
-
+        
         $('table tbody').on('click', '.btn-delete', function () {
             $(this).parent().parent().remove();
         });
@@ -121,26 +140,21 @@
 
             const price = $(this).parent().parent().find(".tdPrice").html();
             $(this).parent().parent().find(".tdPrice").html("<input type='number' value='" + price + "' class='form-control price'/>");
-            
+
             const quantity = $(this).parent().parent().find(".tdQuantity").html();
             $(this).parent().parent().find(".tdQuantity").html("<input type='number' value='" + quantity + "' class='form-control quantity'/>");
-            
+
             $(this).parent().parent().find(".tdAction").html(rowUpdateButtons);
-
-
         });
     });
-
 </script>
-
-
-
 
 <style>
     ::selection {
         background-color: #FF4401;
         color: white;
     }
+    
     
     .addIcon {
         margin-top: 20px;
@@ -162,32 +176,29 @@
     }
     
     .tlacitko1
-           {
-               background-color: #FF4401;
-               color: white;
-               border-color: #FF4401;
-               border-radius: 0;
-               }
-               
-               .tlacitko1:hover
-                      {
-                          background-color: white;
-                          color: #FF4401;
-                          border-color: #FF4401;
-                          }  
-
-     .tlacitko2
-               {
-                   background-color: white;
-                   color: #FF4401;
-                   border-color: #FF4401;
-                   border-radius: 0;
-                   }
-                   
-                   .tlacitko2:hover
-                          {
-                              background-color: #FF4401;
-                              color: white;
-                              border-color: white;
-                              }  
+    {
+        background-color: #FF4401;
+        color: white;
+        border-color: #FF4401;
+        border-radius: 0;
+    }
+    .tlacitko1:hover
+    {
+        background-color: white;
+        color: #FF4401;
+        border-color: #FF4401;
+    }  
+    .tlacitko2
+    {
+        background-color: white;
+        color: #FF4401;
+        border-color: #FF4401;
+        border-radius: 0;
+    } 
+    .tlacitko2:hover
+    {
+        background-color: #FF4401;
+        color: white;
+        border-color: white;
+    }  
 </style>
