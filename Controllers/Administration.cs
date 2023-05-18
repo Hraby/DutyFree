@@ -23,5 +23,10 @@ namespace DutyFree.Controllers
         {
             return View();
         }
+
+        public IActionResult UserViewAdmin()
+        {
+            return View();
+        }
     }
 }
