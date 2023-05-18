@@ -1,7 +1,9 @@
+
 @model DutyFree.Models.AdminViewModel
 
+
 @{
-    ViewBag.Title = "Admin - Order View";
+    ViewBag.Title = "Admin - Historie objednávek";
     Layout = "_Layout";
 }
 
@@ -18,7 +20,7 @@
                 <th scope="col">Jméno</th>
                 <th scope="col">Datum a čas</th>
                 <th scope="col">Produkt</th>
-                <th scope="col">Počet</th>
+                <th scope="col">Množství</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +41,31 @@
         </tbody>
     </table>
 </div>
+   
 
+<!--Příprava na propojení s databází-->
+@*<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Jméno</th>
+                <th scope="col">Datum a čas</th>
+                <th scope="col">Produkt</th>
+                <th scope="col">Množství</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td class="id">@user.UserId</td>
+                    <td class="tdName"><a href="#">@user.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>*@
 
 <style>
     ::selection {
