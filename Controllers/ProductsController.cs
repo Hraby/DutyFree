@@ -1,11 +1,12 @@
 using Dapper;
 using DutyFree.Data;
 using DutyFree.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace DutyFree.Controllers;
 
+[Authorize]
 public class ProductsController : Controller
 {
     private readonly Database _database;
@@ -14,7 +15,7 @@ public class ProductsController : Controller
     {
         _database = database;
     }
-    
+
     [HttpGet]
     public IActionResult Administration()
     {
@@ -22,22 +23,27 @@ public class ProductsController : Controller
         return View("Administration", new AdminViewModel(){Products = products.ToList()});
     }
 
-
-    public IActionResult Index()
+    public IActionResult Index(string search)
     {
         IEnumerable<ProductModel> products = _database.GetProducts();
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            products = products.Where(p => p.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
+        }
+        ViewBag.Search = search;
         return View("Index", new AdminViewModel() { Products = products.ToList() });
     }
 
     [HttpPost]
-    public JsonResult Insert(ProductModel product)
+    public JsonResult Insert(string name, int price, int quantity)
     {
-        string name = product.Name;
-        int price = product.Price;
-        int quantity = product.Quantity;
-        _database.InsertProduct(name, price, quantity);
-
-        return Json(new { success = true, message = "Produkt byl úspěšně přidán do databáze" });
+        if(ModelState.IsValid)
+        {
+            _database.InsertProduct(name, price, quantity);
+            return Json(new { success = true, message = "Produkt byl úspěšně přidán do databáze" });
+        }
+        return Json(new { success = false, message = "Produkt nebyl přidán do databáze" });
     }
 
     [HttpPut]
@@ -61,4 +67,4 @@ public class ProductsController : Controller
         return Json(new { success = true, message = "Produkt byl odebrán z databáze" });
     }
 
-}
+    }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -17,18 +20,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Produkty</a>
-                    <a asp-area="" asp-controller="MyOrders" asp-action="Index" class="nav-link">Moje objednávky</a>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin panel
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" asp-controller="Products" asp-action="Administration">Správa produktů</a></li>
-                            <li><a class="dropdown-item" asp-controller="MyOrders" asp-action="Administration">Historie objednávek</a></li>
-                            <li><a class="dropdown-item" asp-controller="Users" asp-action="Index">Uživatelské profily</a></li>
-                        </ul>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Produkty</a>
+                        <a asp-area="" asp-controller="MyOrders" asp-action="Index" class="nav-link">Moje objednávky</a>
+                        <a asp-area="" asp-controller="Users" asp-action="Index" class="nav-link">Účet</a>
+                        <a asp-area="" asp-controller="Security" asp-action="LogOut" class="nav-link">Log Out</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin panel
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" asp-controller="Products" asp-action="Administration">Správa produktů</a></li>
+                                <li><a class="dropdown-item" asp-controller="MyOrders" asp-action="Administration">Historie objednávek</a></li>
+                            </ul>
+                        </li>
+                    }
                 </div>
             </div>
         </div>
