@@ -130,12 +130,13 @@
         var currentDate = new Date();
         currentDate.setDate(1);
         var firstDayOfMonth = currentDate.toISOString().slice(0, 10);
-
         document.getElementById("datumOd").value = firstDayOfMonth;
 
         // Defaultní nastavení aktuálního datumu
         var currentDate = new Date().toISOString().slice(0, 10);
         document.getElementById("datumDo").value = currentDate;
+
+
 
         // Validace datumu objednávky
         var tableRows = document.querySelectorAll(".table tbody tr");
@@ -174,6 +175,17 @@
         var fromDate = new Date(document.getElementById("datumOd").value);
         var toDate = new Date(document.getElementById("datumDo").value);
 
+        // Validace časového úseku, prohození datumů
+        if (fromDate > toDate) {
+            var tempDate = fromDate;
+            fromDate = toDate;
+            toDate = tempDate;
+
+            document.getElementById("datumOd").value = fromDate.toISOString().slice(0, 10);
+            document.getElementById("datumDo").value = toDate.toISOString().slice(0, 10);
+        }
+
+
         var tableRows = document.querySelectorAll(".table tbody tr");
 
         tableRows.forEach(function (row) {
@@ -188,6 +200,23 @@
         });
 
         updateTotalPrice();
+        calculateTotalPrice();
+    }
+
+    // Přepočítání ceny při aktivování filtru
+    function calculateTotalPrice() {
+        var totalPrice = 0;
+
+        var filteredRows = document.querySelectorAll(".table tbody tr[style='display: table-row;']");
+
+        filteredRows.forEach(function (row) {
+            var priceCell = row.querySelector("td:nth-child(4)");
+            var price = parseFloat(priceCell.innerText);
+            totalPrice += price;
+        });
+
+        var totalCell = document.getElementById("celkovaCena");
+        totalCell.innerHTML = "<strong>" + totalPrice.toFixed(2) + " Kč</strong>";
     }
 
 
@@ -200,6 +229,7 @@
         });
 
         updateTotalPrice();
+        calculateTotalPrice();
         
         // Nastavení prvního dne v měsíci a aktuálního data
         var currentDate = new Date();
