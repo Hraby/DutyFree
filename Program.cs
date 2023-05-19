@@ -21,13 +21,11 @@ builder.Services.AddAuthentication(
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     
     });
+
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admin", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireRole(Role.Admin.ToString());
-    });
+    options.AddPolicy("Administrator", policy =>
+        policy.RequireRole(UserRole.Admin.ToString()));
 });
 
 builder.Services.AddHttpContextAccessor();

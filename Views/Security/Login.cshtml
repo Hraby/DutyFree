@@ -22,12 +22,18 @@
             <tbody>
                 @foreach (var user in Model.Users)
                 {
-                    <input type="hidden" class="userId" value="@user.UserId" />
                     <tr>
                         <td>@user.Name</td>
                         <td>@user.Email</td>
                         <td>@user.Role</td>
-                        <td><button type="button" class="submitBtn btn btn-sm btn-primary rounded-0">Přihlásit se</button></td>
+                        <td>
+                            @using (Html.BeginForm("Login", "Security", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="submitBtn btn btn-sm btn-primary rounded-0">Přihlásit se</button>
+                                <input type="hidden" name="userId" value="@user.UserId">
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -35,27 +41,12 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.submitBtn').click(function () {
-            var $row = $(this).closest('tbody');
-            var userId = $row.find('.userId').val();
-            var rowData = {
-                'userId': userId
-            };
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Login", "Security")',
-                data: $.param(rowData),
-                contentType: 'application/x-www-form-urlencoded',
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
+    const submitButtons = document.querySelectorAll('.submitBtn');
+    submitButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const form = button.closest('form');
+            form.submit();
         });
     });
 </script>

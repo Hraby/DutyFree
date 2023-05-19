@@ -6,10 +6,10 @@ public class UserModel
     public string Name{ get; set; }
     public string Email { get; set; }
     public string ImageUrl { get; set; }
-    public int Role { get; set; }
+    public UserRole Role { get; set; }
 }
 
-public enum Role
+public enum UserRole
 {
     User = 0,
     Admin = 1

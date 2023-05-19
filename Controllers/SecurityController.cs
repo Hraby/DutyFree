@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DutyFree.Controllers;
 
+[Authorize]
 public class SecurityController : Controller
 {
     private readonly Database _database;
@@ -18,6 +19,7 @@ public class SecurityController : Controller
         _database = database;
     }
 
+    [AllowAnonymous]
     public IActionResult Login()
     {
         IEnumerable<UserModel> users = _database.GetUsers();
@@ -31,28 +33,30 @@ public class SecurityController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(int userId)
     {
-        bool isAuthenticated = false;
         var user = _database.GetUser(userId);
-        List<Claim> claims = new List<Claim>()
-        {
-            new Claim("UserId", user.UserId.ToString(), ClaimValueTypes.Integer),
-            new Claim("Name", user.Name),
-            new Claim("Email", user.Email),
-            new Claim("ImageUrl", user.ImageUrl ?? string.Empty),
-            new Claim(ClaimTypes.Role, user.Role.ToString())
-        };
 
-        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var principal = new ClaimsPrincipal(identity);
-        var properties = new AuthenticationProperties();
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, properties);
-        isAuthenticated = true;
-        if (isAuthenticated)
+        if (user != null)
         {
-            return RedirectToAction("Index","Products");
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim("UserId", user.UserId.ToString(), ClaimValueTypes.Integer),
+                new Claim("Name", user.Name),
+                new Claim("Email", user.Email),
+                new Claim("ImageUrl", user.ImageUrl ?? string.Empty),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+            var properties = new AuthenticationProperties();
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, properties).Wait();
+            return RedirectToAction("Index", "Products");
         }
+
         return RedirectToAction("Index", "Products");
     }
 

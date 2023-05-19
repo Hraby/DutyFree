@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DutyFree.Controllers;
 
+[Authorize]
 public class UserController : Controller
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -17,13 +18,12 @@ public class UserController : Controller
         _database = database;
         _httpContextAccessor = httpContextAccessor;
     }
-
-    [Authorize]
+    
     public IActionResult Index()
     {
         return View(GetCurrentUser());
     }
-
+    
     private UserModel GetCurrentUser()
     {
         var context = _httpContextAccessor.HttpContext;

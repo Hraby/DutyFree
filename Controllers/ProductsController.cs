@@ -17,6 +17,7 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "Administrator")]
     public IActionResult Administration()
     {
         IEnumerable<ProductModel> products = _database.GetProducts();
