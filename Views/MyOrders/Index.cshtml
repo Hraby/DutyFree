@@ -33,7 +33,6 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <button type="button" id="filterButton" class="btn btn-primary rounded-0">Filtrovat</button>
             <button type="button" id="resetButton" class="btn btn-secondary rounded-0">Obnovit</button>
         </div>
     </div>
@@ -160,15 +159,19 @@
     };
 
 
-
-    // Propojení tlačítka Filter & Reset
-    document.getElementById("filterButton").addEventListener("click", function () {
-        filterOrders();
-    });
     document.getElementById("resetButton").addEventListener("click", function () {
         resetOrders();
     });
 
+    // Přidání události input pro fromDate
+    document.getElementById("datumOd").addEventListener("input", function () {
+        filterOrders();
+    });
+
+    // Přidání události input pro toDate
+    document.getElementById("datumDo").addEventListener("input", function () {
+        filterOrders();
+    });
 
     // Filtrování objednávek na základě časového rozmezí
     function filterOrders() {
@@ -184,7 +187,6 @@
             document.getElementById("datumOd").value = fromDate.toISOString().slice(0, 10);
             document.getElementById("datumDo").value = toDate.toISOString().slice(0, 10);
         }
-
 
         var tableRows = document.querySelectorAll(".table tbody tr");
 
