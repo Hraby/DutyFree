@@ -49,7 +49,6 @@
             var productId = $(this).data("product-id");
 
             $.ajax({
-                url: "@Url.Action("Purchase", "Products")",
                 type: "POST",
                 data: { productId: productId },
                 success: function (result) {

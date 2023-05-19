@@ -51,7 +51,7 @@ public class Database
 
     public UserModel GetUser(int id)
     {
-        string query = "select * from dutyfree.dbo.users where UserId = @UserId";
+        string query = "SELECT * FROM dutyfree.dbo.users WHERE UserId = @UserId";
         var par = new { UserId = id };
         var user = _connection.QuerySingleOrDefault<UserModel>(query, par);
         return user;
