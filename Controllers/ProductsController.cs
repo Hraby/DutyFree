@@ -22,10 +22,11 @@ public class ProductsController : Controller
         IEnumerable<ProductModel> products = _database.GetProducts();
         return View("Administration", new AdminViewModel(){Products = products.ToList()});
     }
+    
 
     public IActionResult Index(string search)
     {
-        IEnumerable<ProductModel> products = _database.GetProducts();
+        IEnumerable<ProductModel> products = _database.GetProducts2();
 
         if (!string.IsNullOrEmpty(search))
         {

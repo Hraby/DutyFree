@@ -31,7 +31,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<UsersController>();
+builder.Services.AddScoped<UserController>();
 
 var app = builder.Build();
 

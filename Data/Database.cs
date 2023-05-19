@@ -22,6 +22,12 @@ public class Database
         return _connection.Query<ProductModel>(query).ToList();
     }
 
+    public IEnumerable<ProductModel> GetProducts2()
+    {
+        string query = "select * from dutyfree.dbo.products where Quantity > 0";
+        return _connection.Query<ProductModel>(query).ToList();
+    }
+
     public int InsertProduct(string name, int price, int quantity)
     {
         string query = "INSERT INTO dutyfree.dbo.products (DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity, ImageUrl) VALUES (GETDATE(), 1, GETDATE(), 1, 0, @Name, @Price, @Quantity, 0);";

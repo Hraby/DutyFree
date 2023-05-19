@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace DutyFree.Controllers;
 
-public class UsersController : Controller
+public class UserController : Controller
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly Database _database;
 
-    public UsersController(Database database, IHttpContextAccessor httpContextAccessor)
+    public UserController(Database database, IHttpContextAccessor httpContextAccessor)
     {
         _database = database;
         _httpContextAccessor = httpContextAccessor;
