@@ -1,4 +1,4 @@
-@model DutyFree.Models.AdminViewModel
+@model DutyFree.Models.UserModel
 
 @{
     ViewBag.Title = "Admin panel";
@@ -20,8 +20,8 @@
             </div>
         </div>
         <div class="col-8">
-            <h2>Petr Mrázek</h2>
-            <h3>uzivatel@email.neco</h3>
+            <h2>@Model.Name</h2>
+            <h3>@Model.Email</h3>
         </div>
     </div>
 </div>

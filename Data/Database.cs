@@ -3,6 +3,7 @@ using Dapper;
 using System.Data;
 using DutyFree.Controllers;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DutyFree.Data;
 
@@ -23,9 +24,9 @@ public class Database
 
     public int InsertProduct(string name, int price, int quantity)
     {
-        string query = "exec dutyfree.dbo.ProcProductInsert @Name, @ImageUrl, @Quantity, @Price);";
-        var par = new { Name = name, ImageUrl = 0,Price = price, Quantity = quantity};
-        return _connection.Execute(query, par);
+        string query = "INSERT INTO dutyfree.dbo.products (DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity, ImageUrl) VALUES (GETDATE(), 1, GETDATE(), 1, 0, @Name, @Price, @Quantity, 0);";
+        var par = new { Name = name, Price = price, Quantity = quantity};
+        return (int)_connection.ExecuteScalar(query, par);
     }
 
     public void EditProduct(int id, string name, int price, int quantity)
@@ -35,11 +36,25 @@ public class Database
         _connection.Execute(query, par);
     }
 
-    public void DeleteProduct(int productId)
+    public int DeleteProduct(int productId)
     {
-        string query = "EXEC dbo.ProcProductDelete @ProductId";
+        string query = "DELETE FROM dutyfree.dbo.Products WHERE ProductId=@ProductId";
         var par = new { ProductId = productId };
-        _connection.Execute(query, par);
+        return (int)_connection.ExecuteScalar(query, par);
+    }
+
+    public UserModel GetUser(int id)
+    {
+        string query = "select * from dutyfree.dbo.users where UserId = @UserId";
+        var par = new { UserId = id };
+        var user = _connection.QuerySingleOrDefault<UserModel>(query, par);
+        return user;
+    }
+
+    public IEnumerable<UserModel> GetUsers()
+    {
+        string query = "exec dbo.ProcUsers";
+        return _connection.Query<UserModel>(query).ToList();
     }
 }
 

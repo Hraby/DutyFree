@@ -6,13 +6,12 @@
 <section class="hero">
     <div class="container">
         <div class="vyhledavaci-lista">
-            <h1 class="text-center text-white">Na co máš chuť?</h1>
-            <div class="input-group mb-3 rounded-0">
-                <input type="text" class="form-control rounded-0">
-                <div class="input-group-next">
-                    <button class="btn rounded-0" type="button">Vyhledat</button>
+            <form method="get" action="@Url.Action("Index", "Products")">
+                <div class="input-group mb-3 rounded-0">
+                    <input type="text" name="search" class="form-control rounded-0" value="@ViewBag.Search" />
+                    <input class="btn rounded-0" type="submit" value="Vyhledat" />
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
@@ -31,7 +30,7 @@
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col d-flex align-items-center justify-content-between flex-row">
                                     <p class="text-danger" style="margin: 0">@product.Price Kč</p>
-                                    <a href="#" class="btn rounded-0">Koupit</a>
+                                    <a href="#" class="btn rounded-0 btn-purchase" data-product-id="@product.ProductId">Koupit</a>
                                 </div>
                             </div>
                         </div>
@@ -41,6 +40,25 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn-purchase").click(function (e) {
+            e.preventDefault();
+            var productId = $(this).data("product-id");
+
+            $.ajax({
+                url: "@Url.Action("Purchase", "Products")",
+                type: "POST",
+                data: { productId: productId },
+                success: function (result) {
+                    $(".skladem-" + productId).text("Skladem " + result.quantity + " ks");
+                }
+            });
+        });
+    });
+</script>
+
 
 <style>
     ::selection {
