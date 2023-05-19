@@ -63,20 +63,20 @@
 <script>
     var emptyNewRow = "<tr class='trNewRow'>";
     emptyNewRow += '<td class="tdName">';
-    emptyNewRow += '<input type="text" class="form-control name" placeholder="Název" name="Name" />';
+    emptyNewRow += '<input type="text" class="form-control name rounded-0" placeholder="Název" name="Name" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdImage">';
-    emptyNewRow += '<input type="file" class="form-control image" name="Image" />';
+    emptyNewRow += '<input type="file" class="form-control image rounded-0" name="Image" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdPrice">';
-    emptyNewRow += '<input type="number" class="form-control price" name="Price" />';
+    emptyNewRow += '<input type="number" class="form-control price rounded-0" name="Price" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdQuantity">';
-    emptyNewRow += '<input type="number" class="form-control quantity" name="Quantity" />';
+    emptyNewRow += '<input type="number" class="form-control quantity rounded-0" name="Quantity" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdAction d-flex justify-content-evenly">';
-    emptyNewRow += '    <button type="submit" class="btn btn-sm btn-success btn-save" asp-controller="Products" asp-action="Insert">Uložit</button>';
-    emptyNewRow += '    <button class="btn btn-sm btn-success btn-cancel">Zahodit</button>';
+    emptyNewRow += '    <button type="submit" class="btn btn-success btn-save rounded-0" asp-controller="Products" asp-action="Insert">Uložit</button>';
+    emptyNewRow += '    <button class="btn btn-success btn-cancel rounded-0">Zahodit</button>';
     emptyNewRow += '</td>';
     emptyNewRow += '</tr>';
 
@@ -175,27 +175,27 @@
         padding-top: 9%;
     }
     
-    .tlacitko1
+    .btn-save
     {
         background-color: #FF4401;
         color: white;
         border-color: #FF4401;
         border-radius: 0;
     }
-    .tlacitko1:hover
+    .btn-save:hover
     {
         background-color: white;
         color: #FF4401;
         border-color: #FF4401;
     }  
-    .tlacitko2
+    .btn-cancel
     {
         background-color: white;
         color: #FF4401;
         border-color: #FF4401;
         border-radius: 0;
     } 
-    .tlacitko2:hover
+    .btn-cancel:hover
     {
         background-color: #FF4401;
         color: white;
