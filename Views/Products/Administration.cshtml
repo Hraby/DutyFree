@@ -33,7 +33,6 @@
             <th>Cena za ks</th>
             <th>Aktuální množství</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +40,7 @@
         {
             <tr>
                 <td class="tdName">@product.Name</td>
-                <td class="tdImage"><img src="obrazek1.jpg" alt="Obrázek 1"></td>
+                <td class="tdImage"><img src="@product.ImageUrl"></td>
                 <td class="tdPrice">@product.Price</td>
                 <td class="tdQuantity">@product.Quantity</td>
                 <input type="hidden" name="MaxPrice" value="@product.ProductId"/>
