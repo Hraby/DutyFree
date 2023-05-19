@@ -38,9 +38,33 @@
                     </div>
                 </div>
             }
+
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Test</h5>
+                        <p class="text-success text-left">Skladem 1 ks</p>
+                        <hr>
+                        <div class="discount-circle">
+                            <span class="discount-text">-58%</span>
+                        </div>
+                        <div class="new-badge">
+                            <span class="new-text">NEW</span>
+                        </div>
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="col d-flex align-items-center justify-content-between flex-row">
+                                <p class="text-danger" style="margin: 0">25 Kč</p>
+                                <a href="#" class="btn rounded-0 btn-purchase">Koupit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -97,7 +121,7 @@
         color: white;
         border-color: #FF4401;
     }
-.btn:hover
+    .btn:hover
     {
         background-color: white;
         color: #FF4401;
@@ -111,4 +135,45 @@
         padding-right: 3%;
         padding-bottom: 5%;
     }
+
+
+    .discount-circle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        background-color: yellow;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .discount-text {
+        color: black;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .new-badge {
+        position: absolute;
+        top: 70px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        background-color: #2475b0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .new-text {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+
 </style>
