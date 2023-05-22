@@ -6,7 +6,7 @@
 <section class="hero">
     <div class="container">
         <div class="vyhledavaci-lista">
-            <h1 class="text-center"><strong>Na co máš chuť?</strong></h1>
+            <h1 class="text-center">Na co máš chuť?</h1>
             <form method="get" action="@Url.Action("Index", "Products")">
                 <div class="input-group mb-3 rounded-0">
                     <input type="text" name="search" class="form-control rounded-0" value="@ViewBag.Search"/>
@@ -102,15 +102,16 @@
         align-items: center;
     }
     
+    .vyhledavaci-lista
+    {
+        padding-top: 6%;
+        }
+    
     h1
     {
         color: white;
         }
     
-    .input-group-next
-    {
-        padding-left: 1%;
-    }
     .btn
     {
         background-color: #FF4401;
