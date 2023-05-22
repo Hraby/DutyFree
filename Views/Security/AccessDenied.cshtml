@@ -4,10 +4,30 @@
 @{
 }
 <section class="container text-center py-5">
-    <h3>Přístup odepřen</h3>
+    <h2>Přístup odepřen</h2>
     <p>K přístupu na tuto stránku nemáte oprávnění. Můžete se vrátit zpět pomocí tlačítka.</p>
-    <a href="/Products/Index" class="btn btn-success">Vrátit zpět</a>
+    <a href="/Products/Index" class="btn">Vrátit zpět</a>
 </section>
 
 <style>
+
+    ::selection {
+        background-color: #FF4401;
+        color: white;
+    }
+
+
+    .btn {
+        background-color: #ff4500;
+        color: white;
+        border-radius: 0;
+        width: 120px;
+        transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+        .btn:hover {
+            background-color: white;
+            color: #ff4500;
+            border-color: #ff4500;
+        }
 </style>
