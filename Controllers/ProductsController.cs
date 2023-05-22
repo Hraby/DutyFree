@@ -3,17 +3,20 @@ using DutyFree.Data;
 using DutyFree.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using DutyFree.Controllers;
 
 namespace DutyFree.Controllers;
 
 [Authorize]
 public class ProductsController : Controller
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly Database _database;
 
-    public ProductsController(Database database)
+    public ProductsController(Database database, IHttpContextAccessor httpContextAccessor)
     {
         _database = database;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     [HttpGet]
@@ -23,7 +26,6 @@ public class ProductsController : Controller
         IEnumerable<ProductModel> products = _database.GetProducts();
         return View("Administration", new AdminViewModel(){Products = products.ToList()});
     }
-    
 
     public IActionResult Index(string search)
     {
@@ -38,36 +40,62 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public JsonResult Insert(string name, int price, int quantity)
+    public ActionResult Insert(string name, int price, int quantity)
     {
         if(ModelState.IsValid)
         {
             _database.InsertProduct(name, price, quantity);
-            return Json(new { success = true, message = "Produkt byl úspěšně přidán do databáze" });
         }
-        return Json(new { success = false, message = "Produkt nebyl přidán do databáze" });
+
+        return null;
+    }
+
+    [HttpPost]
+    public JsonResult Buy(int productId)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = GetCurrentUser();
+            var product = _database.GetProduct(productId);
+            _database.BuyProduct(productId, user.UserId, product.Name, product.Price);
+            return Json(new { success = true, message = productId + " " + user.UserId + " " + product.Name + " " + product.Price });
+        }
+
+        return Json(new { success = false, message = "Invalid model state." });
     }
 
     [HttpPut]
-    public JsonResult Edit(int productId, string name, int price, int quantity)
+    public ActionResult Edit(int productId, string name, int price, int quantity)
     {
         if (ModelState.IsValid)
         {
             _database.EditProduct(productId, name, price, quantity);
-            return Json(new { success = true, message = "Produkt byl úspěšně editován v databázi" });
         }
-        return Json(new {success = true, message = "Produkt nebyl editován v databázi"});
+
+        return Ok();
     }
     
 
     [HttpDelete]
-    public JsonResult Delete(int productId)
+    public ActionResult Delete(int productId)
     {
         if (ModelState.IsValid)
         {
             _database.DeleteProduct(productId);
-            return Json(new { success = true, message = "Produkt byl smazán z databáze" });
         }
-        return Json(new {success = true, message = "Produkt nebyl smazán z databáze"});
+
+        return Ok();
+    }
+    
+    private UserModel GetCurrentUser()
+    {
+        var context = _httpContextAccessor.HttpContext;
+        var userIdClaim = HttpContext.User.FindFirst("UserId");
+        if (int.TryParse(userIdClaim?.Value, out int userId))
+        {
+            var user = _database.GetUser(userId);
+            return user;
+        }
+        return null;
     }
 }

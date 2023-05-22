@@ -57,6 +57,21 @@ public class Database
         return user;
     }
 
+    public int BuyProduct(int productId, int userId, string name, int price)
+    {
+        string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GetDate(), @Name, @Price, @UserId, @ProductId);UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId";
+        var par = new { ProductId = productId, UserId = userId, Name = name, Price = price };
+        return (int)_connection.ExecuteScalar(query, par);
+    }
+
+    public ProductModel GetProduct(int ProductId)
+    {
+        string query = "SELECT * FROM dutyfree.dbo.products WHERE ProductId = @ProductId";
+        var par = new { ProductId = ProductId };
+        var product = _connection.QuerySingleOrDefault<ProductModel>(query, par);
+        return product;
+    }
+
     public IEnumerable<UserModel> GetUsers()
     {
         string query = "exec dbo.ProcUsers";
