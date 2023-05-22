@@ -104,7 +104,7 @@
     emptyNewRow += '</tr>';
 
 var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe>';
-var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-save2" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-cancel">Zahodit</button>';
+var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-save2 rounded-0" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-cancel rounded-0">Zahodit</button>';
 
 
     $(document).ready(function () {
@@ -225,6 +225,20 @@ var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-save2" 
     .tabulka{
         padding-bottom: 50px;
     }
+    
+    .btn-save2
+        {
+            background-color: #FF4401;
+            color: white;
+            border-color: #FF4401;
+            border-radius: 0;
+        }
+        .btn-save2:hover
+        {
+            background-color: white;
+            color: #FF4401;
+            border-color: #FF4401;
+        }
     
     .btn-save
     {
