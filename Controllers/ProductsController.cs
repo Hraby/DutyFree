@@ -49,24 +49,25 @@ public class ProductsController : Controller
     }
 
     [HttpPut]
-    public JsonResult Edit(ProductModel product)
+    public JsonResult Edit(int productId, string name, int price, int quantity)
     {
-        int id = product.ProductId;
-        string name = product.Name;
-        int price = product.Price;
-        int quantity = product.Quantity;
-        _database.EditProduct(id, name, price, quantity);
-
-        return Json(new {success = true, message = "Produkt byl úspěšně editován v databázi"});
+        if (ModelState.IsValid)
+        {
+            _database.EditProduct(productId, name, price, quantity);
+            return Json(new { success = true, message = "Produkt byl úspěšně editován v databázi" });
+        }
+        return Json(new {success = true, message = "Produkt nebyl editován v databázi"});
     }
+    
 
     [HttpDelete]
-    public JsonResult Delete(ProductModel product)
+    public JsonResult Delete(int productId)
     {
-        int id = product.ProductId;
-        _database.DeleteProduct(id);
-
-        return Json(new { success = true, message = "Produkt byl odebrán z databáze" });
+        if (ModelState.IsValid)
+        {
+            _database.DeleteProduct(productId);
+            return Json(new { success = true, message = "Produkt byl smazán z databáze" });
+        }
+        return Json(new {success = true, message = "Produkt nebyl smazán z databáze"});
     }
-
-    }
+}
