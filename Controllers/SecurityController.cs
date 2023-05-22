@@ -66,4 +66,9 @@ public class SecurityController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login", "Security");
     }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
 }
