@@ -15,14 +15,14 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="datumOd">Datum (od)</label>
-                    <input type="date" id="datumOd" name="datumOd" class="form-control" lang="cs">
+                    <input type="date" id="datumOd" name="datumOd" class="form-control rounded-0" lang="cs">
                 </div>
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="datumDo">Datum (do)</label>
-                    <input type="date" id="datumDo" name="datumDo" class="form-control" lang="cs">
+                    <input type="date" id="datumDo" name="datumDo" class="form-control rounded-0" lang="cs">
                 </div>
             </div>
         </div>
@@ -38,62 +38,65 @@
 
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th>Datum</th>
-                <th>Čas</th>
-                <th>Produkt</th>
-                <th>Cena</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Datum</th>
+            <th>Čas</th>
+            <th>Produkt</th>
+            <th>Cena</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>17.05.2023</td>
-                <td>10:30</td>
-                <td>Produkt A</td>
-                <td>100 Kč</td>
-                <td>
-                    <span class="cancel-icon" onclick="cancelOrder(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>03.05.2023</td>
-                <td>10:45</td>
-                <td>Produkt B</td>
-                <td>150 Kč</td>
-                <td>
-                    <span class="cancel-icon" onclick="cancelOrder(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>05.05.2023</td>
-                <td>14:15</td>
-                <td>Produkt C</td>
-                <td>200 Kč</td>
-                <td>
-                    <span class="cancel-icon" onclick="cancelOrder(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </span>
-                </td>
-            </tr>
+        <tr>
+            <td>17.05.2023</td>
+            <td>10:30</td>
+            <td>Produkt A</td>
+            <td>100 Kč</td>
+            <td>
+                <span class="cancel-icon" onclick="cancelOrder(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>03.05.2023</td>
+            <td>10:45</td>
+            <td>Produkt B</td>
+            <td>150 Kč</td>
+            <td>
+                <span class="cancel-icon" onclick="cancelOrder(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>05.05.2023</td>
+            <td>14:15</td>
+            <td>Produkt C</td>
+            <td>200 Kč</td>
+            <td>
+                <span class="cancel-icon" onclick="cancelOrder(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF4401" class="bi bi-x" viewBox="0 0 16 16" cursor="pointer">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </td>
+        </tr>
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="4" class="text-left"><strong>Cena celkem:</strong></td>
-                <td id="celkovaCena"><strong>0 Kč</strong></td>
-            </tr>
+        <tr>
+            <td colspan="4" class="text-left"><strong>Cena celkem:</strong></td>
+            <td id="celkovaCena"><strong>0 Kč</strong></td>
+        </tr>
         </tfoot>
     </table>
+    
+    <button type="button" class="btn btn-warning rounded-0">Export</button>
+
 </div>
 
 
@@ -265,23 +268,6 @@
     .dates {
         margin-top: 20px;
     }
-    
-    .btn-primary
-    {
-        margin-top: 2%;
-        margin-right: 4%;
-        margin-bottom: 2%;
-        background-color: #FF4401;
-        color: white;
-        border-color: #FF4401;
-    }
-
-    .btn-primary:hover
-    {
-        background-color: white;
-        color: #FF4401;
-        border-color: #FF4401;
-    } 
 
     .btn-secondary
     {
@@ -298,4 +284,19 @@
         color: white;
         border-color: #FF4401;
     } 
+    
+      .btn-warning
+                     {
+                         margin-top: 2%;
+                         background-color: #FF4401;
+                         color: white;
+                         border-color: #FF4401;
+                         }
+                         
+                     .btn-warning:hover
+                     {
+                         background-color: white;
+                         color: #FF4401;
+                         border-color: #FF4401;
+                         } 
 </style>
