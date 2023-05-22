@@ -35,10 +35,10 @@ public class Database
         return (int)_connection.ExecuteScalar(query, par);
     }
 
-    public void EditProduct(int id, string name, int price, int quantity)
+    public void EditProduct(int productid, string name, int price, int quantity)
     {
-        string query = "EXEC dbo.ProcProductEdit @ProductId, @Name, @ImageUrl, @Quantity, @Price";
-        var par = new { ProductId = id, Name = name, ImageUrl = 0, Quantity = quantity, Price = price };
+        string query = "UPDATE dutyfree.dbo.products set Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE() WHERE ProductId = @ProductId";
+        var par = new { ProductId = productid, Name = name, Quantity = quantity, Price = price };
         _connection.Execute(query, par);
     }
 
