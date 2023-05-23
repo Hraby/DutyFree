@@ -86,7 +86,7 @@ public class ProductsController : Controller
 
         return Ok();
     }
-    
+
     private UserModel GetCurrentUser()
     {
         var context = _httpContextAccessor.HttpContext;

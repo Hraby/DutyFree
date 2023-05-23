@@ -28,11 +28,11 @@ public class Database
         return _connection.Query<ProductModel>(query).ToList();
     }
 
-    public int InsertProduct(string name, int price, int quantity)
+    public void InsertProduct(string name, int price, int quantity)
     {
         string query = "INSERT INTO dutyfree.dbo.products (DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity, ImageUrl) VALUES (GETDATE(), 1, GETDATE(), 1, 0, @Name, @Price, @Quantity, 0);";
         var par = new { Name = name, Price = price, Quantity = quantity};
-        return (int)_connection.ExecuteScalar(query, par);
+        _connection.ExecuteScalar(query, par);
     }
 
     public void EditProduct(int productid, string name, int price, int quantity)
@@ -42,11 +42,11 @@ public class Database
         _connection.Execute(query, par);
     }
 
-    public int DeleteProduct(int productId)
+    public void DeleteProduct(int productId)
     {
         string query = "DELETE FROM dutyfree.dbo.Products WHERE ProductId=@ProductId";
         var par = new { ProductId = productId };
-        return (int)_connection.ExecuteScalar(query, par);
+        _connection.ExecuteScalar(query, par);
     }
 
     public UserModel GetUser(int id)
@@ -57,11 +57,11 @@ public class Database
         return user;
     }
 
-    public int BuyProduct(int productId, int userId, string name, int price)
+    public void BuyProduct(int productId, int userId, string name, int price)
     {
-        string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GetDate(), @Name, @Price, @UserId, @ProductId);UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId";
+        string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GETDATE(), @Name, @Price, @UserId, @ProductId)"; // UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId"
         var par = new { ProductId = productId, UserId = userId, Name = name, Price = price };
-        return (int)_connection.ExecuteScalar(query, par);
+        _connection.ExecuteScalar(query, par);
     }
 
     public ProductModel GetProduct(int ProductId)
