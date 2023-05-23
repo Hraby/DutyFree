@@ -71,12 +71,19 @@
         $(".btn-purchase").click(function (e) {
             e.preventDefault();
             var productId = $(this).data("product-id");
-
+            var data = {productId : productId}
+            console.log(data);
             $.ajax({
-                type: "POST",
-                data: { productId: productId },
-                success: function (result) {
-                    $(".skladem-" + productId).text("Skladem " + result.quantity + " ks");
+                url: '@Url.Action("Buy", "Products")',
+                type: 'POST',
+                dataType: 'json',
+                data: $.param(data),
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (response) {
+                    console.log("Success:", response);
+                },
+                error: function (error) {
+                    console.log("Error:", error);
                 }
             });
         });

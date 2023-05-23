@@ -33,7 +33,6 @@ public class UserController : Controller
             var user = _database.GetUser(userId);
             return user;
         }
-
         return null;
     }
 
