@@ -9,13 +9,25 @@
             <h1 class="text-center">Na co máš chuť?</h1>
             <form method="get" action="@Url.Action("Index", "Products")">
                 <div class="input-group mb-3 rounded-0">
-                    <input type="text" name="search" class="form-control rounded-0" value="@ViewBag.Search"/>
-                    <input class="btn rounded-0" type="submit" value="Vyhledat"/>
+                    <input type="text" name="search" class="form-control rounded-0" value="@ViewBag.Search" />
+                    <input class="btn rounded-0" type="submit" value="Vyhledat" />
                 </div>
             </form>
         </div>
+        <p class="tagy text-center">
+            <a href="#" class="tag">#MojeOblíbené</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#OblíbenéOstatních</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Sleva</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Novinka</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Svačina</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Sladké</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Slané</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Nápoje</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="tag">#Zmrzlina</a>
+        </p>
     </div>
 </section>
+
 
 <section class="container-lg">
 <div class="karticka">
@@ -177,6 +189,23 @@
         color: white;
         font-size: 16px;
         font-weight: bold;
+    }
+
+    .tagy {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .tag {
+        color: white;
+        text-decoration: none;
+        transition: text-decoration 0.3s;
+    }
+
+    .tag:hover {
+        color: white;
+        text-decoration: underline;
     }
 
 
