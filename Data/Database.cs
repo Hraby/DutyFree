@@ -1,6 +1,7 @@
 using DutyFree.Models;
 using Dapper;
 using System.Data;
+using System.Collections.Generic;
 using DutyFree.Controllers;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ public class Database
     {
         string query = "select * from dutyfree.dbo.products where Quantity > 0";
         return _connection.Query<ProductModel>(query).ToList();
+    }
+
+    public List<OrderModel> GetOrders(int userid)
+    {
+        string query = "select * from dutyfree.dbo.orders where UserId = @UserId";
+        var par = new { UserId = userid };
+        return _connection.Query<OrderModel>(query, par).ToList();
     }
 
     public void InsertProduct(string name, int price, int quantity)
@@ -59,7 +67,7 @@ public class Database
 
     public void BuyProduct(int productId, int userId, string name, int price)
     {
-        string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GETDATE(), @Name, @Price, @UserId, @ProductId)"; // UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId"
+        string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GETDATE(), @Name, @Price, @UserId, @ProductId); UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId;";
         var par = new { ProductId = productId, UserId = userId, Name = name, Price = price };
         _connection.ExecuteScalar(query, par);
     }
