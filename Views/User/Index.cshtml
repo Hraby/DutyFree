@@ -1,7 +1,7 @@
-@model DutyFree.Models.UserModel
+@model DutyFree.Models.AdminViewModel
 
 @{
-    ViewBag.Title = "Admin panel";
+    ViewBag.Title = Model.CurrentUser.Name;
     Layout = "_Layout";
 }
 
@@ -20,45 +20,27 @@
             </div>
         </div>
         <div class="col-8">
-            <h2>@Model.Name</h2>
-            <h3>@Model.Email</h3>
+            <h2>@Model.CurrentUser.Name</h2>
+            <h3>@Model.CurrentUser.Email</h3>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="tabulka">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Produkt</th>
-            <th scope="col">Datum a čas</th>
-            <th scope="col">Množství</th>
-            <th scope="col">Cena</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Pepsi</td>
-            <td>1. 4. 2023</td>
-            <td>5 ks</td>
-            <td>135 Kč</td>
-        </tr>
-        <tr>
-            <td>Toast</td>
-            <td>18. 3. 2023</td>
-            <td>4 ks</td>
-            <td>60 Kč</td>
-        </tr>
-        <tr>
-            <td>Corny</td>
-            <td>9. 1. 2023</td>
-            <td>1 ks</td>
-            <td>17 Kč</td>
-        </tr>
-        </tbody>
-    </table>
-        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Produkt</th>
+                    <th scope="col">Datum a čas</th>
+                    <th scope="col">Množství</th>
+                    <th scope="col">Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

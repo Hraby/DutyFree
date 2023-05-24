@@ -18,12 +18,25 @@ public class UserController : Controller
         _database = database;
         _httpContextAccessor = httpContextAccessor;
     }
-    
+
     public IActionResult Index()
     {
-        return View(GetCurrentUser());
+        var currentUser = GetCurrentUser();
+        IEnumerable<UserModel> users = _database.GetUsers();
+        IEnumerable<OrderModel> orders = _database.GetOrders(currentUser.UserId);
+
+
+        var viewModel = new AdminViewModel()
+        {
+            Users = users.ToList(),
+            Orders = orders.ToList(),
+            CurrentUser = currentUser
+        };
+
+        return View(viewModel);
     }
-    
+
+
     private UserModel GetCurrentUser()
     {
         var context = _httpContextAccessor.HttpContext;
