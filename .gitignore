@@ -587,3 +587,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,macos,windows,csharp
 appsettings.json
 appsettings.json
+DutyFree.csproj
+Properties/launchSettings.json
