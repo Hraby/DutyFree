@@ -49,16 +49,17 @@ public class ProductsController : Controller
         return null;
     }
 
-    [HttpPost]
-    public ActionResult Buy(int productId)
+    [HttpDelete]
+    public JsonResult Buy(int productId)
     {
         if (ModelState.IsValid)
         {
             var user = GetCurrentUser();
             var product = _database.GetProduct(productId);
             _database.BuyProduct(productId, user.UserId, product.Name, product.Price);
+            return Json(new { Success = true });
         }
-        return null;
+        return Json(new { Success = false });
     }
 
     [HttpPut]
