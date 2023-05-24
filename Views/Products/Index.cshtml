@@ -81,7 +81,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
       $(".btn-purchase").click(function(e) {
         e.preventDefault();
         var productId = $(this).data("product-id");
@@ -100,8 +100,6 @@
               console.log("Success:", response);
               sklademElement.text('Skladem ' + (skladem - 1) + ' ks');
               if (skladem - 1 === 0) {
-                sklademElement.text('Nedostupné');
-                sklademElement.addClass('text-danger');
                 $(this).attr('disabled', true);
               }
               createNotification('Produkt byl úspěšně zakoupen!');
