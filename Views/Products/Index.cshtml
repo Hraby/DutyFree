@@ -76,31 +76,66 @@
     </div>
 </section>
 
+<div class="notification-container"></div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $(".btn-purchase").click(function (e) {
-            e.preventDefault();
-            var productId = $(this).data("product-id");
-            var data = {productId : productId}
-            console.log(data);
-            $.ajax({
-                url: '@Url.Action("Buy", "Products")',
-                type: 'POST',
-                dataType: 'json',
-                data: $.param(data),
-                contentType: 'application/x-www-form-urlencoded',
-                success: function (response) {
-                    console.log("Success:", response);
-                },
-                error: function (error) {
-                    console.log("Error:", error);
-                }
-            });
-        });
+  $(document).ready(function() {
+    $(".btn-purchase").click(function(e) {
+      e.preventDefault();
+      var productId = $(this).data("product-id");
+      var data = { productId: productId };
+      console.log(data);
+      $.ajax({
+        url: '@Url.Action("Buy", "Products")',
+        type: 'POST',
+        dataType: 'json',
+        data: $.param(data),
+        contentType: 'application/x-www-form-urlencoded',
+        success: function(response) {
+          console.log("Success:", response);
+          createNotification('Produkt byl úspěšně zakoupen!');
+        },
+        error: function(error) {
+          console.log("Error:", error);
+        }
+      });
     });
+
+    function createNotification(message) {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+
+      var closeBtn = document.createElement('span');
+      closeBtn.className = 'close';
+      closeBtn.innerHTML = '&times;';
+      notification.appendChild(closeBtn);
+
+      var content = document.createElement('p');
+      content.innerHTML = message;
+      notification.appendChild(content);
+
+      $(".notification-container").append(notification);
+
+      // Odstranění notifikace s animací fade-out
+      var fadeOutAnimation = setTimeout(function() {
+        $(notification).fadeOut(500, function() {
+          $(this).remove();
+        });
+      }, 3000);
+
+      // Odstranění notifikace po kliknutí na křížek
+      $(closeBtn).click(function() {
+        clearTimeout(fadeOutAnimation);
+        $(notification).fadeOut(500, function() {
+          $(this).remove();
+        });
+      });
+    }
+  });
 </script>
+
 
 
 <style>
@@ -209,4 +244,29 @@
     }
 
 
+    .notification-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      width: 300px;
+      max-width: calc(100% - 40px);
+    }
+    .notification {
+      position: relative;
+      padding: 10px;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      animation: slide-in 0.3s ease-in-out;
+      margin-bottom: 10px;
+    }
+    .notification .close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      color: #fff;
+    }
 </style>
