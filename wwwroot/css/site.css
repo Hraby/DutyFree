@@ -2,12 +2,6 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -78,4 +72,22 @@ margin-left: 20%
 
 .dropdown-menu .dropdown-item:hover {
     background-color: #FF4401;
+}
+
+@media only screen and (max-width: 600px) {
+    .col-4 img{
+        width: 50px;
+        height: 50px;
+        margin-top: 10%;
+    }
+    
+    .col-8 h2{
+        margin-top: 50%;
+        font-size: 20px;
+    }
+    
+    .col-8 h3{
+        margin-top: 60%;
+        font-size: 10px;
+    }
 }
