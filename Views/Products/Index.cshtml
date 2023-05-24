@@ -55,7 +55,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center">Test</h5>
-                        <p class="text-success text-left">Skladem 1 ks</p>
+                        <p class="text-success text-left">null</p>
                         <hr>
                         <div class="discount-circle">
                             <span class="discount-text">-58%</span>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="col d-flex align-items-center justify-content-between flex-row">
-                                <p class="text-danger" style="margin: 0">25 Kč</p>
+                                <p class="text-danger" style="margin: 0">null</p>
                                 <a href="#" class="btn rounded-0 btn-purchase">Koupit</a>
                             </div>
                         </div>
@@ -92,14 +92,7 @@
         type: 'POST',
         dataType: 'json',
         data: $.param(data),
-        contentType: 'application/x-www-form-urlencoded',
-        success: function(response) {
-          console.log("Success:", response);
-          createNotification('Produkt byl úspěšně zakoupen!');
-        },
-        error: function(error) {
-          console.log("Error:", error);
-        }
+        contentType: 'application/x-www-form-urlencoded'
       });
     });
 
