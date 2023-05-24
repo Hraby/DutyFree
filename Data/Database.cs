@@ -36,6 +36,12 @@ public class Database
         var par = new { UserId = userid };
         return _connection.Query<OrderModel>(query, par).ToList();
     }
+    
+    public List<OrderModel> GetOrders2()
+    {
+        string query = "select * from dutyfree.dbo.orders";
+        return _connection.Query<OrderModel>(query).ToList();
+    }
 
     public void InsertProduct(string name, int price, int quantity)
     {

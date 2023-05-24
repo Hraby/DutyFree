@@ -41,7 +41,7 @@ public class MyOrdersController : Controller
     {
         var user = GetCurrentUser();
         IEnumerable<UserModel> users = _database.GetUsers();
-        IEnumerable<OrderModel> orders = _database.GetOrders(user.UserId);
+        IEnumerable<OrderModel> orders = _database.GetOrders2();
         return View("Administration", new AdminViewModel() { Users = users.ToList(), Orders = orders.ToList() });
     }
 
