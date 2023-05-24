@@ -39,7 +39,10 @@ public class MyOrdersController : Controller
     [Authorize(Policy = "Administrator")]
     public IActionResult Administration()
     {
-        return View();
+        var user = GetCurrentUser();
+        IEnumerable<UserModel> users = _database.GetUsers();
+        IEnumerable<OrderModel> orders = _database.GetOrders(user.UserId);
+        return View("Administration", new AdminViewModel() { Users = users.ToList(), Orders = orders.ToList() });
     }
 
     private UserModel GetCurrentUser()
