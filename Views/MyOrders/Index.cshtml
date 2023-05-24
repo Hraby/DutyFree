@@ -77,6 +77,8 @@
 
 </div>
 
+<div class="notification-container"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Zrušení objednávky
@@ -87,6 +89,7 @@
         var row = element.parentNode.parentNode;
         row.parentNode.removeChild(row);
         updateTotalPrice();
+        createNotification('Produkt byl úspěšně odebrán!');
         $.ajax({
         url: '@Url.Action("Delete", "MyOrders")',
         type: 'DELETE',
@@ -94,6 +97,39 @@
         data: $.param(data),
         contentType: 'application/x-www-form-urlencoded'
       });
+    }
+
+    // Vytvoření notifikace
+    function createNotification(message, color) {
+        var notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.style.backgroundColor = color;
+
+        var closeBtn = document.createElement('span');
+        closeBtn.className = 'close';
+        closeBtn.innerHTML = '&times;';
+        notification.appendChild(closeBtn);
+
+        var content = document.createElement('p');
+        content.innerHTML = message;
+        notification.appendChild(content);
+
+        $(".notification-container").append(notification);
+
+        // Odstranění notifikace s animací fade-out
+        var fadeOutAnimation = setTimeout(function () {
+            $(notification).fadeOut(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+
+        // Odstranění notifikace po kliknutí na křížek
+        $(closeBtn).click(function () {
+            clearTimeout(fadeOutAnimation);
+            $(notification).fadeOut(500, function () {
+                $(this).remove();
+            });
+        });
     }
 
     // Aktualizace celkové ceny
@@ -271,19 +307,48 @@
         border-color: #FF4401;
     } 
     
-      .btn-warning
-                     {
-                         margin-top: 2%;
-                         background-color: #FF4401;
-                         color: white;
-                         border-color: #FF4401;
-                         margin-bottom: 2%;
-                         }
+  .btn-warning
+    {
+        margin-top: 2%;
+        background-color: #FF4401;
+        color: white;
+        border-color: #FF4401;
+        margin-bottom: 2%;
+        }
                          
-                     .btn-warning:hover
-                     {
-                         background-color: white;
-                         color: #FF4401;
-                         border-color: #FF4401;
-                         } 
+    .btn-warning:hover
+    {
+        background-color: white;
+        color: #FF4401;
+        border-color: #FF4401;
+        } 
+
+
+    .notification-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        width: 300px;
+        max-width: calc(100% - 40px);
+    }
+
+    .notification {
+        position: relative;
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        animation: slide-in 0.3s ease-in-out;
+        margin-bottom: 10px;
+    }
+
+        .notification .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
 </style>
