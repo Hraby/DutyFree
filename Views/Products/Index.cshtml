@@ -9,7 +9,7 @@
             <h1 class="text-center">Na co máš chuť?</h1>
             <form method="get" action="@Url.Action("Index", "Products")">
                 <div class="input-group mb-3 rounded-0">
-                    <input type="text" name="search" class="form-control rounded-0" value="@ViewBag.Search" />
+                    <input type="text" name="search" class="form-control rounded-0"  placeholder="Zadejte hledaný produkt" value="@ViewBag.Search" />
                     <input class="btn rounded-0" type="submit" value="Vyhledat" />
                 </div>
             </form>
@@ -81,31 +81,40 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $(".btn-purchase").click(function(e) {
-      e.preventDefault();
-      var productId = $(this).data("product-id");
-      var data = { productId: productId };
-      console.log(data);
-      $.ajax({
-        url: '@Url.Action("Buy", "Products")',
-        type: 'POST',
-        dataType: 'json',
-        data: $.param(data),
-        contentType: 'application/x-www-form-urlencoded',
-        success: function(response) {
-          console.log("Success:", response);
-          createNotification('Produkt byl úspěšně zakoupen!');
-        },
-        error: function(error) {
-          console.log("Error:", error);
+    $(document).ready(function() {
+      $(".btn-purchase").click(function(e) {
+        e.preventDefault();
+        var productId = $(this).data("product-id");
+        var data = { productId: productId };
+        var sklademElement = $(this).closest('.card').find('.text-success');
+        var skladem = parseInt(sklademElement.text().replace(/[^0-9]/g, ''));
+        
+        if (skladem > 0) {
+          $.ajax({
+            url: '@Url.Action("Buy", "Products")',
+            type: 'DELETE',
+            dataType: 'json',
+            data: $.param(data),
+            contentType: 'application/x-www-form-urlencoded',
+            success: function() {
+              sklademElement.text('Skladem ' + (skladem - 1) + ' ks');
+              if (skladem - 1 === 0) {
+                sklademElement.text('Nedostupné');
+                sklademElement.addClass('text-danger');
+                $(this).attr('disabled', true);
+              }
+              createNotification('Produkt byl úspěšně zakoupen!');
+            },
+          });
+        } else {
+          createNotification('Produkt není momentálně dostupný', 'red');
         }
       });
-    });
 
-    function createNotification(message) {
-      var notification = document.createElement('div');
-      notification.className = 'notification';
+    function createNotification(message, color) {
+          var notification = document.createElement('div');
+          notification.className = 'notification';
+          notification.style.backgroundColor = color;
 
       var closeBtn = document.createElement('span');
       closeBtn.className = 'close';
@@ -125,7 +134,7 @@
         });
       }, 3000);
 
-      // Odstranění notifikace po kliknutí na křížek
+      // Odstranění notifikace po kliknutí na křížek 
       $(closeBtn).click(function() {
         clearTimeout(fadeOutAnimation);
         $(notification).fadeOut(500, function() {
