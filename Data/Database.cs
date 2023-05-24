@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DutyFree.Controllers;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DutyFree.Data;
 
@@ -69,6 +70,13 @@ public class Database
     {
         string query = "INSERT INTO dutyfree.dbo.orders (DateCreated, Name, Price, UserId, ProductId) VALUES (GETDATE(), @Name, @Price, @UserId, @ProductId); UPDATE dutyfree.dbo.products SET Quantity = Quantity - 1 WHERE ProductId = @ProductId;";
         var par = new { ProductId = productId, UserId = userId, Name = name, Price = price };
+        _connection.ExecuteScalar(query, par);
+    }
+
+    public void DeleteOrder(int orderId)
+    {
+        string query = "DELETE FROM dutyfree.dbo.Orders WHERE OrderId=@OrderId";
+        var par = new { OrderId = orderId };
         _connection.ExecuteScalar(query, par);
     }
 

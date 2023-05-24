@@ -6,8 +6,7 @@ namespace DutyFree.Models
 {
     public class OrderModel
     {
-        public int Id { get; set; }
-        [Column("DateCreated")]
+        public int OrderId { get; set; }
         public DateTime? DateCreated { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }

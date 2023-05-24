@@ -25,6 +25,16 @@ public class MyOrdersController : Controller
         IEnumerable<OrderModel> orders = _database.GetOrders(user.UserId);
         return View("Index", new AdminViewModel { Orders = orders.ToList() });
     }
+
+    [HttpDelete]
+    public IActionResult Delete(int orderId)
+    {
+        if (ModelState.IsValid)
+        {
+            _database.DeleteOrder(orderId);
+        }
+        return null;
+    }
     
     [Authorize(Policy = "Administrator")]
     public IActionResult Administration()

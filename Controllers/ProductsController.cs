@@ -46,22 +46,19 @@ public class ProductsController : Controller
         {
             _database.InsertProduct(name, price, quantity);
         }
-
         return null;
     }
 
     [HttpPost]
-    public JsonResult Buy(int productId)
+    public ActionResult Buy(int productId)
     {
         if (ModelState.IsValid)
         {
             var user = GetCurrentUser();
             var product = _database.GetProduct(productId);
             _database.BuyProduct(productId, user.UserId, product.Name, product.Price);
-            return Json(new { success = true, message = productId + " " + user.UserId + " " + product.Name + " " + product.Price });
         }
-
-        return Json(new { success = false, message = "Invalid model state." });
+        return null;
     }
 
     [HttpPut]
@@ -71,8 +68,7 @@ public class ProductsController : Controller
         {
             _database.EditProduct(productId, name, price, quantity);
         }
-
-        return Ok();
+        return null;
     }
     
 
@@ -83,8 +79,7 @@ public class ProductsController : Controller
         {
             _database.DeleteProduct(productId);
         }
-
-        return Ok();
+        return null;
     }
 
     private UserModel GetCurrentUser()
@@ -93,8 +88,7 @@ public class ProductsController : Controller
         var userIdClaim = HttpContext.User.FindFirst("UserId");
         if (int.TryParse(userIdClaim?.Value, out int userId))
         {
-            var user = _database.GetUser(userId);
-            return user;
+            return _database.GetUser(userId);
         }
         return null;
     }

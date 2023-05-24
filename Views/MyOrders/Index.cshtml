@@ -50,8 +50,8 @@
             @foreach (var order in Model.Orders)
             {
             <tr>
-                <td>@order.DateCreated.ToString("dd.MM.yyyy")</td>
-                <td>@order.DateCreated.ToString("HH:mm")</td>
+                <td>@order.DateCreated.AddHours(2).ToString("dd.MM.yyyy")</td>
+                <td>@order.DateCreated.AddHours(2).ToString("HH:mm")</td>
                 <td>@order.Name</td>
                 <td>@order.Price</td>
                 <td>
@@ -60,14 +60,15 @@
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                         </svg>
                     </span>
+                    <input type="hidden" value="@order.OrderId"></input>
                 </td>
             </tr>
             }
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="4" class="text-left"><strong>Cena celkem:</strong></td>
-            <td id="celkovaCena"><strong>0 Kč</strong></td>
+            <td colspan="4" class="text-left">Cena celkem:</td>
+            <td id="celkovaCena">0 Kč</td>
         </tr>
         </tfoot>
     </table>
@@ -76,13 +77,23 @@
 
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Zrušení objednávky
     function cancelOrder(element) {
+        var orderId = $("input[type=hidden]").val();
+        console.log(orderId);
+        var data = { orderId: orderId };
         var row = element.parentNode.parentNode;
         row.parentNode.removeChild(row);
         updateTotalPrice();
+        $.ajax({
+        url: '@Url.Action("Delete", "MyOrders")',
+        type: 'DELETE',
+        dataType: 'json',
+        data: $.param(data),
+        contentType: 'application/x-www-form-urlencoded'
+      });
     }
 
     // Aktualizace celkové ceny
@@ -98,7 +109,7 @@
         });
 
         var totalCell = document.getElementById("celkovaCena");
-        totalCell.innerHTML = "<strong>" + totalPrice.toFixed(2) + " Kč</strong>";
+        totalCell.innerHTML = totalPrice.toFixed(2) + " Kč";
     }
 
     window.onload = function () {
@@ -111,9 +122,7 @@
         // Defaultní nastavení aktuálního datumu
         var currentDate = new Date().toISOString().slice(0, 10);
         document.getElementById("datumDo").value = currentDate;
-
-
-
+        
         // Validace datumu objednávky
         var tableRows = document.querySelectorAll(".table tbody tr");
         var twentyFourHoursAgo = new Date();
