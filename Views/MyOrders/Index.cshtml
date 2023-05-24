@@ -50,8 +50,8 @@
             @foreach (var order in Model.Orders)
             {
             <tr>
-                <td>@order.DateCreated.AddHours(2).ToString("dd.MM.yyyy")</td>
-                <td>@order.DateCreated.AddHours(2).ToString("HH:mm")</td>
+                <td>@order.DateCreatedCZ.ToString("dd.MM.yyyy")</td>
+                <td>@order.DateCreatedCZ.ToString("HH:mm")</td>
                 <td>@order.Name</td>
                 <td>@order.Price</td>
                 <td>

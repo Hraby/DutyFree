@@ -1,6 +1,4 @@
 ﻿
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
 
 namespace DutyFree.Models
 {
@@ -12,5 +10,7 @@ namespace DutyFree.Models
         public int Price { get; set; }
         public int UserId { get; set; }
         public int ProductId { get; set; }
+        
+        public DateTime? DateCreatedCZ => DateCreated?.AddHours(2);
     }
 }

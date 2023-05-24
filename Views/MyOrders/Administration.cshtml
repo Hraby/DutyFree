@@ -21,21 +21,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var order in Model.Orders.OrderByDescending(o => o.DateCreated))
+        @foreach (var order in Model.Orders.OrderByDescending(o => o.DateCreated))
+        {
+            var user = Model.Users.FirstOrDefault(u => u.UserId == order.UserId);
+            if (user != null)
             {
-                var user = Model.Users.FirstOrDefault(u => u.UserId == order.UserId);
-                if (user != null)
-                {
-                    <tr>
-                        <td>@user.Name</td>
-                        <td>@order.DateCreated</td>
-                        <td>@order.Name</td>
-                        <td>1 ks</td>
-                        <td>@order.Price Kč</td>
-                    </tr>
-                }
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@order.DateCreatedCZ</td>
+                    <td>@order.Name</td>
+                    <td>1 ks</td>
+                    <td>@order.Price Kč</td>
+                </tr>
             }
-        </tbody>
+        }
+                </tbody>
     </table>
 </div>
 
