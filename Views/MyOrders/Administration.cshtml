@@ -1,4 +1,6 @@
+
 @model DutyFree.Models.AdminViewModel
+
 
 @{
     ViewBag.Title = "Admin - Historie objednávek";
@@ -9,35 +11,61 @@
     <h1 class="display-4 text-white text-center"><strong>Historie objednávek</strong></h1>
 </section>
 
+
 <div class="container">
     <table class="table table-hover">
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Jméno</th>
                 <th scope="col">Datum a čas</th>
                 <th scope="col">Produkt</th>
                 <th scope="col">Množství</th>
-                <th scope="col">Cena</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var order in Model.Orders.OrderByDescending(o => o.DateCreated))
-            {
-                var user = Model.Users.FirstOrDefault(u => u.UserId == order.UserId);
-                if (user != null)
-                {
-                    <tr>
-                        <td>@user.Name</td>
-                        <td>@order.DateCreated</td>
-                        <td>@order.Name</td>
-                        <td>1 ks</td>
-                        <td>@order.Price Kč</td>
-                    </tr>
-                }
-            }
+            <tr>
+                <th scope="row">1</th>
+                <td><a href="#">Mark</a></td>
+                <td>18.  5. 2023</td>
+                <td>Pepsi</td>
+                <td>2 ks</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td><a href="#">Jacob</a></td>
+                <td>18.  5. 2023</td>
+                <td>Pepsi</td>
+                <td>1 ks</td>
+            </tr>
         </tbody>
     </table>
 </div>
+   
+
+<!--Příprava na propojení s databází-->
+@*<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Jméno</th>
+                <th scope="col">Datum a čas</th>
+                <th scope="col">Produkt</th>
+                <th scope="col">Množství</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td class="id">@user.UserId</td>
+                    <td class="tdName"><a href="#">@user.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>*@
 
 <style>
     ::selection {
@@ -61,3 +89,4 @@
         justify-content: center;
     }
 </style>
+
