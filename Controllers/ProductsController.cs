@@ -75,12 +75,28 @@ public class ProductsController : Controller
     }
 
     [HttpPut]
-    public ActionResult Edit(int productId, string name, int price, int quantity)
+    public ActionResult Edit(int productId, string name, int price, int quantity, IFormFile? image)
     {
         if (ModelState.IsValid)
         {
-            var user = GetCurrentUser();
-            _database.EditProduct(user.UserId, productId, name, price, quantity);
+            if (image == null)
+            {
+                var user = GetCurrentUser();
+                string imageUrl = null;
+                _database.EditProduct(user.UserId, productId, name, price, quantity, imageUrl);
+            }
+            else
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                string imagePath = Path.Combine(_environment.WebRootPath, "images", "products", fileName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+                var user = GetCurrentUser();
+                string imageUrl = "/images/products/" + fileName; ;
+                _database.EditProduct(user.UserId, productId, name, price, quantity, imageUrl);
+            }
         }
         return null;
     }

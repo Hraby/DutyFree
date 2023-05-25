@@ -77,7 +77,7 @@ var emptyNewRow = "<tr class='trNewRow'>";
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdAction d-flex justify-content-evenly">';
     emptyNewRow += '    <button type="submit" class="btn btn-sm btn-success btn-save" asp-controller="Products" asp-action="Insert">Uložit</button>';
-    emptyNewRow += '    <button class="btn btn-sm btn-success btn-cancel">Zahodit</button>';
+    emptyNewRow += '    <button class="btn btn-sm btn-success btn-discard">Zahodit</button>';
     emptyNewRow += '</td>';
     emptyNewRow += '</tr>';
 
@@ -96,7 +96,7 @@ var emptyNewRow = "<tr class='trNewRow'>";
         $('table tbody').on('click', '.btn-save', function () {
             const row = $(this).closest("tr");
             const name = row.find(".name").val();
-            const imageInput = row.find(".image")[0];
+            const image = row.find(".image")[0];
             const price = row.find(".price").val();
             const quantity = row.find(".quantity").val();
 
@@ -104,9 +104,9 @@ var emptyNewRow = "<tr class='trNewRow'>";
             formData.append('Name', name);
             formData.append('Price', price);
             formData.append('Quantity', quantity);
-            formData.append('image', imageInput.files[0]);
+            formData.append('image', image.files[0]);
             row.find(".tdName").html(name);
-            row.find(".tdImage").html(imageInput.value);
+            row.find(".tdImage").html(image.value);
             row.find(".tdPrice").html(price);
             row.find(".tdQuantity").html(quantity);
             row.find(".tdAction").html(rowButtons);
@@ -123,27 +123,50 @@ var emptyNewRow = "<tr class='trNewRow'>";
         $('table tbody').on('click', '.btn-save2', function (){
             const row = $(this).closest("tr");
             const name = row.find(".name").val();
-            const image = row.find(".image").attr("src");
+            var imageLength = row.find(".image")[0].files.length;
+            const image = row.find(".image")[0];
             const price = row.find(".price").val();
             const quantity = row.find(".quantity").val();
             var productId = row.find('input[name="productId"]').val();
             var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe><input type="hidden" name="productId" value="' + productId + '">';
             row.find(".tdName").html(name);
-            row.find("tdImage").html(image);
+            row.find(".tdImage").html("<img id='image' src='" + image.files.src + "'>");
             row.find(".tdPrice").html(price);
             row.find(".tdQuantity").html(quantity);
             row.find(".tdAction").html(rowButtons);
             
-            createNotification('Produkt byl úspěšně upraven!');
-            var data = { productId: productId, name: name, price: price, quantity: quantity };
-            $.ajax({
-                url: '@Url.Action("Edit", "Products")',
-                type: 'PUT',
-                dataType: 'json',
-                data: $.param(data),
-                contentType: 'application/x-www-form-urlencoded'
+            if (imageLength != 0) {
+                const formData = new FormData();
+                formData.append('Name', name);
+                formData.append('Price', price);
+                formData.append('Quantity', quantity);
+                formData.append('image', image.files[0]);
+                formData.append('ProductId', productId);
+                
+                createNotification('Produkt byl úspěšně upraven!');
+                $.ajax({
+                    url: '@Url.Action("Edit", "Products")',
+                    type: 'PUT',
+                    data: formData,
+                    processData: false,
+                    contentType: false
             });
-
+            } else {
+                const formData = new FormData();
+                formData.append('Name', name);
+                formData.append('Price', price);
+                formData.append('Quantity', quantity);
+                formData.append('ProductId', productId);
+                
+                createNotification('Produkt byl úspěšně upraven!');
+                $.ajax({
+                    url: '@Url.Action("Edit", "Products")',
+                    type: 'PUT',
+                    data: formData,
+                    processData: false,
+                    contentType: false
+                });
+            }
         });
         
         $('table tbody').on('click', '.btn-delete', function () {
@@ -173,6 +196,11 @@ var emptyNewRow = "<tr class='trNewRow'>";
             row.find(".tdPrice").html(price);
             row.find(".tdQuantity").html(quantity);
             row.find(".tdAction").html(rowButtons);
+            $(this).parent().parent().remove();
+        });
+        
+        $('table tbody').on('click', '.btn-discard', function () {
+            $(this).parent().parent().remove();
         });
 
         $('table tbody').on('click', '.btn-edit', function () {
@@ -276,14 +304,14 @@ var emptyNewRow = "<tr class='trNewRow'>";
         color: #FF4401;
         border-color: #FF4401;
     }  
-    .btn-cancel
+    .btn-cancel, .btn-discard
     {
         background-color: white;
         color: #FF4401;
         border-color: #FF4401;
         border-radius: 0;
     } 
-    .btn-cancel:hover
+    .btn-cancel:hover, .btn-discard:hover
     {
         background-color: #FF4401;
         color: white;
@@ -325,8 +353,13 @@ var emptyNewRow = "<tr class='trNewRow'>";
         
         
    .tdImage img{
-        width: 100%;
         height: 50px;
         object-fit: contain;
         }
+    .tdImage{
+        display:flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+        
 </style>

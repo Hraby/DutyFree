@@ -50,11 +50,20 @@ public class Database
         _connection.ExecuteScalar(query, par);
     }
 
-    public void EditProduct(int updatedby,int productid, string name, int price, int quantity)
+    public void EditProduct(int updatedby,int productid, string name, int price, int quantity, string? imageurl)
     {
-        string query = "UPDATE dutyfree.dbo.products set UpdatedBy = @UpdatedBy, Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE() WHERE ProductId = @ProductId";
-        var par = new { UpdatedBy = updatedby,ProductId = productid, Name = name, Quantity = quantity, Price = price };
-        _connection.Execute(query, par);
+        if (imageurl == null)
+        {
+            string query = "UPDATE dutyfree.dbo.products set UpdatedBy = @UpdatedBy, Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE() WHERE ProductId = @ProductId";
+            var par = new { UpdatedBy = updatedby,ProductId = productid, Name = name, Quantity = quantity, Price = price };
+            _connection.Execute(query, par);
+        }
+        else
+        {
+            string query = "UPDATE dutyfree.dbo.products set UpdatedBy = @UpdatedBy, Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE(), ImageUrl = @ImageUrl WHERE ProductId = @ProductId";
+            var par = new { UpdatedBy = updatedby,ProductId = productid, Name = name, Quantity = quantity, Price = price, ImageUrl = imageurl };
+            _connection.Execute(query, par);
+        }
     }
 
     public void DeleteProduct(int productId, int updatedby)
