@@ -40,7 +40,7 @@
         {
             <tr>
                 <td class="tdName">@product.Name</td>
-                <td class="tdImage"><img src="@product.ImageUrl"></td>
+                <td class="tdImage"><img id="image" src="@product.ImageUrl"></td>
                 <td class="tdPrice">@product.Price</td>
                 <td class="tdQuantity">@product.Quantity</td>
                 <td class="buttons tdAction" style="display: flex; justify-content: space-evenly;">
@@ -94,54 +94,45 @@ var emptyNewRow = "<tr class='trNewRow'>";
         });
 
         $('table tbody').on('click', '.btn-save', function () {
-          const row = $(this).closest("tr");
-          const name = row.find(".name").val();
-          const imageInput = row.find(".image")[0];
-          const price = row.find(".price").val();
-          const quantity = row.find(".quantity").val();
-        
-          const formData = new FormData();
-          formData.append('Name', name);
-          formData.append('Price', price);
-          formData.append('Quantity', quantity);
-          formData.append('image', imageInput.files[0]);
-        
-          $.ajax({
-            url: '@Url.Action("Insert", "Products")',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-              // Handle the response from the server
-            console.log(response);
+            const row = $(this).closest("tr");
+            const name = row.find(".name").val();
+            const imageInput = row.find(".image")[0];
+            const price = row.find(".price").val();
+            const quantity = row.find(".quantity").val();
+
+            const formData = new FormData();
+            formData.append('Name', name);
+            formData.append('Price', price);
+            formData.append('Quantity', quantity);
+            formData.append('image', imageInput.files[0]);
             row.find(".tdName").html(name);
-            row.find(".tdImage").html(imageInput.value); // Alternatively, you can display the file name instead of the full path
+            row.find(".tdImage").html(imageInput.value);
             row.find(".tdPrice").html(price);
             row.find(".tdQuantity").html(quantity);
             row.find(".tdAction").html(rowButtons);
-        
             createNotification('Produkt byl úspěšně vytvořen!');
-            },
-            error: function (xhr, status, error) {
-                console.log(error);
-                createNotification('Při vytváření produktu došlo k chybě. Zkuste to prosím znovu.');
-                }
+            $.ajax({
+                url: '@Url.Action("Insert", "Products")',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false
             });
-        });
+        });    
         
         $('table tbody').on('click', '.btn-save2', function (){
-            const name = $(this).parent().parent().find(".name").val();
-            $(this).parent().parent().find(".tdName").html(name);
-            const image = $(this).parent().parent().find(".image").val();
-            $(this).parent().parent().find(".tdImage").html(image);
-            const price = $(this).parent().parent().find(".price").val();
-            $(this).parent().parent().find(".tdPrice").html(price);
-            const quantity = $(this).parent().parent().find(".quantity").val();
-            $(this).parent().parent().find(".tdQuantity").html(quantity);
-            var productId = $(this).closest('tr').find('input[name="productId"]').val();
+            const row = $(this).closest("tr");
+            const name = row.find(".name").val();
+            const image = row.find(".image").attr("src");
+            const price = row.find(".price").val();
+            const quantity = row.find(".quantity").val();
+            var productId = row.find('input[name="productId"]').val();
             var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe><input type="hidden" name="productId" value="' + productId + '">';
-            $(this).parent().parent().find(".tdAction").html(rowButtons);
+            row.find(".tdName").html(name);
+            row.find("tdImage").html(image);
+            row.find(".tdPrice").html(price);
+            row.find(".tdQuantity").html(quantity);
+            row.find(".tdAction").html(rowButtons);
             
             createNotification('Produkt byl úspěšně upraven!');
             var data = { productId: productId, name: name, price: price, quantity: quantity };
@@ -158,7 +149,6 @@ var emptyNewRow = "<tr class='trNewRow'>";
         $('table tbody').on('click', '.btn-delete', function () {
             $(this).parent().parent().remove();
             var productId = $(this).closest('tr').find('input[name="productId"]').val();
-            console.log(productId)
             createNotification('Produkt byl úspěšně odstraněn!');
             $.ajax({
                 url: '@Url.Action("Delete", "Products")',
@@ -171,41 +161,35 @@ var emptyNewRow = "<tr class='trNewRow'>";
         });
 
         $('table tbody').on('click', '.btn-cancel', function () {
-            const name = $(this).parent().parent().find(".name").val();
-            $(this).parent().parent().find(".tdName").html(name);
-            const image = $(this).parent().parent().find(".image").val();
-            $(this).parent().parent().find(".tdImage").html(image);
-            const price = $(this).parent().parent().find(".price").val();
-            $(this).parent().parent().find(".tdPrice").html(price);
-            const quantity = $(this).parent().parent().find(".quantity").val();
-            $(this).parent().parent().find(".tdQuantity").html(quantity);
+            const row = $(this).closest("tr");
+            const name = row.find(".name").val();
+            const imageInput = row.find(".image")[0];
+            const price = row.find(".price").val();
+            const quantity = row.find(".quantity").val();
             var productId = $(this).closest('tr').find('input[name="productId"]').val();
             var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe><input type="hidden" name="productId" value="' + productId + '">';
-            $(this).parent().parent().find(".tdAction").html(rowButtons);
+            row.find(".tdName").html(name);
+            row.find(".tdImage").html(imageInput.value);
+            row.find(".tdPrice").html(price);
+            row.find(".tdQuantity").html(quantity);
+            row.find(".tdAction").html(rowButtons);
         });
 
         $('table tbody').on('click', '.btn-edit', function () {
             const name = $(this).parent().parent().find(".tdName").html();
             $(this).parent().parent().find(".tdName").html("<input type='text' value='" + name + "' class='form-control name rounded-0' placeholder='Název'/>");
-        
             const image = $(this).parent().parent().find(".tdImage").html();
             $(this).parent().parent().find(".tdImage").html("<input type='file' value='" + image + "' class='form-control image rounded-0'/>");
-        
             const price = $(this).parent().parent().find(".tdPrice").html();
             $(this).parent().parent().find(".tdPrice").html("<input type='number' value='" + price + "' class='form-control price rounded-0'/>");
-        
             const quantity = $(this).parent().parent().find(".tdQuantity").html();
             $(this).parent().parent().find(".tdQuantity").html("<input type='number' value='" + quantity + "' class='form-control quantity rounded-0'/>");
-            
             var productId = $(this).closest('tr').find('input[name="productId"]').val();
             var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-save2" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-cancel">Zahodit</button> <input type="hidden" name="productId" value="' + productId + '">';
-            console.log(productId);
             $(this).parent().parent().find(".tdAction").html(rowUpdateButtons);
-
         });
     });
 
-    // Notifikace
     function createNotification(message, color) {
         var notification = document.createElement('div');
         notification.className = 'notification';
@@ -222,21 +206,19 @@ var emptyNewRow = "<tr class='trNewRow'>";
 
         $(".notification-container").append(notification);
 
-        // Odstranění notifikace s animací fade-out
         var fadeOutAnimation = setTimeout(function () {
             $(notification).fadeOut(500, function () {
                 $(this).remove();
             });
         }, 3000);
 
-        // Odstranění notifikace po kliknutí na křížek
         $(closeBtn).click(function () {
             clearTimeout(fadeOutAnimation);
             $(notification).fadeOut(500, function () {
                 $(this).remove();
             });
         });
-    }
+}
 </script>
 
 <style>

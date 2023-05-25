@@ -56,10 +56,9 @@ public class ProductsController : Controller
             string imageUrl = "/images/products/" + fileName;
             _database.InsertProduct(Name, Price, Quantity, imageUrl, user.UserId);
 
-            return Json(new { success = true, message = "Produkt byl úspěšně vytvořen!" });
+            return Json(new { success = true });
         }
-
-        return Json(new { success = false, message = "Chyba při vytváření produktu." });
+        return Json(new { success = false});
     }
 
     [HttpDelete]
@@ -70,9 +69,9 @@ public class ProductsController : Controller
             var user = GetCurrentUser();
             var product = _database.GetProduct(productId);
             _database.BuyProduct(productId, user.UserId, product.Name, product.Price);
-            return Json(new { Success = true });
+            return Json(new { success = true });
         }
-        return Json(new { Success = false });
+        return Json(new { success = false });
     }
 
     [HttpPut]
