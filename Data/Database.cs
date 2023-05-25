@@ -20,13 +20,13 @@ public class Database
 
     public IEnumerable<ProductModel> GetProducts()
     {
-        string query = "exec dbo.ProcProducts";
+        string query = "select * from dutyfree.dbo.products where IsDeleted = 0";
         return _connection.Query<ProductModel>(query).ToList();
     }
 
     public IEnumerable<ProductModel> GetProducts2()
     {
-        string query = "select * from dutyfree.dbo.products where Quantity > 0";
+        string query = "select * from dutyfree.dbo.products where Quantity > 0 AND IsDeleted = 0";
         return _connection.Query<ProductModel>(query).ToList();
     }
 
@@ -43,24 +43,24 @@ public class Database
         return _connection.Query<OrderModel>(query).ToList();
     }
 
-    public void InsertProduct(string name, int price, int quantity)
+    public void InsertProduct(string Name, int Price, int Quantity, string ImageUrl, int createdby)
     {
-        string query = "INSERT INTO dutyfree.dbo.products (DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity, ImageUrl) VALUES (GETDATE(), 1, GETDATE(), 1, 0, @Name, @Price, @Quantity, 0);";
-        var par = new { Name = name, Price = price, Quantity = quantity};
+        string query = "INSERT INTO dutyfree.dbo.products (DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity, ImageUrl) VALUES (GETDATE(), @CreatedBy, GETDATE(), @CreatedBy, 0, @Name, @Price, @Quantity, @ImageUrl);";
+        var par = new { Name = Name, Price = Price, Quantity = Quantity, ImageUrl = ImageUrl, CreatedBy = createdby};
         _connection.ExecuteScalar(query, par);
     }
 
-    public void EditProduct(int productid, string name, int price, int quantity)
+    public void EditProduct(int updatedby,int productid, string name, int price, int quantity)
     {
-        string query = "UPDATE dutyfree.dbo.products set Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE() WHERE ProductId = @ProductId";
-        var par = new { ProductId = productid, Name = name, Quantity = quantity, Price = price };
+        string query = "UPDATE dutyfree.dbo.products set UpdatedBy = @UpdatedBy, Name = @Name, Price = @Price, Quantity = @Quantity, DateUpdated = GETDATE() WHERE ProductId = @ProductId";
+        var par = new { UpdatedBy = updatedby,ProductId = productid, Name = name, Quantity = quantity, Price = price };
         _connection.Execute(query, par);
     }
 
-    public void DeleteProduct(int productId)
+    public void DeleteProduct(int productId, int updatedby)
     {
-        string query = "DELETE FROM dutyfree.dbo.Products WHERE ProductId=@ProductId";
-        var par = new { ProductId = productId };
+        string query = "UPDATE dutyfree.dbo.Products SET IsDeleted = 1, Quantity = 0, DateUpdated = GETDATE(), UpdatedBy = @UpdatedBy WHERE ProductId=@ProductId";
+        var par = new { ProductId = productId, UpdatedBy = updatedby };
         _connection.ExecuteScalar(query, par);
     }
 

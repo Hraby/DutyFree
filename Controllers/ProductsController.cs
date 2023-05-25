@@ -12,11 +12,13 @@ public class ProductsController : Controller
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly Database _database;
+    private readonly IWebHostEnvironment _environment;
 
-    public ProductsController(Database database, IHttpContextAccessor httpContextAccessor)
+    public ProductsController(Database database, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment environment)
     {
         _database = database;
         _httpContextAccessor = httpContextAccessor;
+        _environment = environment;
     }
 
     [HttpGet]
@@ -40,13 +42,24 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public ActionResult Insert(string name, int price, int quantity)
+    public ActionResult Insert(string Name, int Price, int Quantity, IFormFile image)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
-            _database.InsertProduct(name, price, quantity);
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+            string imagePath = Path.Combine(_environment.WebRootPath, "images", "products", fileName);
+            using (var stream = new FileStream(imagePath, FileMode.Create))
+            {
+                image.CopyTo(stream);
+            }
+            var user = GetCurrentUser();
+            string imageUrl = "/images/products/" + fileName;
+            _database.InsertProduct(Name, Price, Quantity, imageUrl, user.UserId);
+
+            return Json(new { success = true, message = "Produkt byl úspěšně vytvořen!" });
         }
-        return null;
+
+        return Json(new { success = false, message = "Chyba při vytváření produktu." });
     }
 
     [HttpDelete]
@@ -67,7 +80,8 @@ public class ProductsController : Controller
     {
         if (ModelState.IsValid)
         {
-            _database.EditProduct(productId, name, price, quantity);
+            var user = GetCurrentUser();
+            _database.EditProduct(user.UserId, productId, name, price, quantity);
         }
         return null;
     }
@@ -78,7 +92,8 @@ public class ProductsController : Controller
     {
         if (ModelState.IsValid)
         {
-            _database.DeleteProduct(productId);
+            var user = GetCurrentUser();
+            _database.DeleteProduct(productId, user.UserId);
         }
         return null;
     }
