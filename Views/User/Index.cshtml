@@ -38,6 +38,15 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Name</td>
+                        <td>@order.DateCreated</td>
+                        <td>1 ks</td>
+                        <td>@order.Price Kč</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
