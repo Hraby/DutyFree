@@ -60,7 +60,7 @@
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                         </svg>
                     </span>
-                    <input type="hidden" value="@order.OrderId"></input>
+                    <input type="hidden" value="@order.OrderId"/>
                 </td>
             </tr>
             }
@@ -83,20 +83,20 @@
 <script>
     // Zrušení objednávky
     function cancelOrder(element) {
-        var orderId = $("input[type=hidden]").val();
+        var row = $(element).closest('tr');
+        var orderId = row.find("input[type=hidden]").val();
         console.log(orderId);
         var data = { orderId: orderId };
-        var row = element.parentNode.parentNode;
-        row.parentNode.removeChild(row);
+        row.remove();
         updateTotalPrice();
         createNotification('Produkt byl úspěšně odebrán!');
         $.ajax({
-        url: '@Url.Action("Delete", "MyOrders")',
-        type: 'DELETE',
-        dataType: 'json',
-        data: $.param(data),
-        contentType: 'application/x-www-form-urlencoded'
-      });
+            url: '@Url.Action("Delete", "MyOrders")',
+            type: 'DELETE',
+            dataType: 'json',
+            data: $.param(data),
+            contentType: 'application/x-www-form-urlencoded'
+        });
     }
 
     // Vytvoření notifikace
