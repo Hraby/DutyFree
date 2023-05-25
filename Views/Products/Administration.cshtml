@@ -62,51 +62,27 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    var emptyNewRow = "<tr class='trNewRow'>";
+var emptyNewRow = "<tr class='trNewRow'>";
     emptyNewRow += '<td class="tdName">';
-    emptyNewRow += '<input type="text" class="form-control name rounded-0" placeholder="Název" name="Name" />';
+    emptyNewRow += '<input type="text" class="form-control name" placeholder="Název" name="Name" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdImage">';
-    emptyNewRow += '<input type="file" class="form-control image rounded-0" name="Image" />';
+    emptyNewRow += '<input type="file" class="form-control image" name="Image" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdPrice">';
-    emptyNewRow += '<input type="number" class="form-control price rounded-0" name="Price" placeholder="Cena" />';
+    emptyNewRow += '<input type="number" class="form-control price" name="Price" />';
     emptyNewRow += '</td>';
     emptyNewRow += '<td class="tdQuantity">';
-    emptyNewRow += '<input type="number" class="form-control quantity rounded-0" name="Quantity" placeholder="Aktuální množství" />';
+    emptyNewRow += '<input type="number" class="form-control quantity" name="Quantity" />';
     emptyNewRow += '</td>';
-    emptyNewRow += '<td class="tdCategory">';
-    emptyNewRow += '<select class="form-control category rounded-0" name="Category">';
-    emptyNewRow += '<option selected>Vyberte kategorii</option>';
-    emptyNewRow += '<option value="#Svačina">#Svačina</option>';
-    emptyNewRow += '<option value="#Sladké">#Sladké</option>';
-    emptyNewRow += '<option value="#Slané">#Slané</option>';
-    emptyNewRow += '<option value="#Nápoje">#Nápoje</option>';
-    emptyNewRow += '<option value="#Zmrzlina">#Zmrzlina</option>';
-    emptyNewRow += '</select>';
-    emptyNewRow += '</td>';
-    emptyNewRow += '</tr>';
-    emptyNewRow += '<tr class="trNewRow">';
-    emptyNewRow += '<td class="tdAction" colspan="5">';
-    emptyNewRow += '<div class="form-check d-inline-block">';
-    emptyNewRow += '<input class="form-check-input" type="checkbox" id="novinka" name="Novinka">';
-    emptyNewRow += '<label class="form-check-label" for="novinka">Novinka</label>';
-    emptyNewRow += '</div>';
-    emptyNewRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-    emptyNewRow += '<div class="form-check d-inline-block">';
-    emptyNewRow += '<input class="form-check-input" type="checkbox" id="sleva" name="Sleva">';
-    emptyNewRow += '<label class="form-check-label" for="sleva">Sleva</label>';
-    emptyNewRow += '</div>';
-    emptyNewRow += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-    emptyNewRow += '<div class="btn-group">';
-    emptyNewRow += '<button type="submit" class="btn btn-success btn-save rounded-0" asp-controller="Products" asp-action="Insert" style="margin-right:20px">Uložit</button>';
-    emptyNewRow += ' <button class="btn btn-success btn-cancel rounded-0">Zahodit</button>';
-    emptyNewRow += '</div>';
+    emptyNewRow += '<td class="tdAction d-flex justify-content-evenly">';
+    emptyNewRow += '    <button type="submit" class="btn btn-sm btn-success btn-save" asp-controller="Products" asp-action="Insert">Uložit</button>';
+    emptyNewRow += '    <button class="btn btn-sm btn-success btn-cancel">Zahodit</button>';
     emptyNewRow += '</td>';
     emptyNewRow += '</tr>';
 
-    var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x btn-delete" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg>';
-    var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-save2" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-cancel">Zahodit</button>';
+    var rowButtons = '<svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-wrench btn-edit" viewBox="0 0 16 16" style="transform: scale(0.8)"><path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"></path></svg> <svg xmlns="http://www.w3.org/2000/svg" cursor="pointer" width="25" height="25" fill="#FF4401" class="bi bi-x" onclick="btn-delete" viewBox="0 0 16 16" style="width: 25px; height: 25px;"><path d="M4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l2.938-2.939a.5.5 0 1 1 .708.708L8.707 8l2.939 2.938a.5.5 0 0 1-.708.708L8 8.707l-2.938 2.939a.5.5 0 0 1-.708-.708L7.293 8 4.354 5.062a.5.5 0 0 1 0-.708z"></path></svg></labe>';
+    var rowUpdateButtons = '<button type="submit" class="btn btn-success btn-sm btn-save" asp-controller="Products" asp-action="Edit">Uložit</button>  <button class="btn btn-danger btn-sm btn-save">Zahodit</button>';
 
 
     $(document).ready(function () {
@@ -118,24 +94,39 @@
         });
 
         $('table tbody').on('click', '.btn-save', function () {
-            const name = $(this).parent().parent().find(".name").val();
-            $(this).parent().parent().find(".tdName").html(name);
-            const image = $(this).parent().parent().find(".image").val();
-            $(this).parent().parent().find(".tdImage").html(image);
-            const price = $(this).parent().parent().find(".price").val();
-            $(this).parent().parent().find(".tdPrice").html(price);
-            const quantity = $(this).parent().parent().find(".quantity").val();
-            $(this).parent().parent().find(".tdQuantity").html(quantity);
-            $(this).parent().parent().find(".tdAction").html(rowButtons);
-            
+          const row = $(this).closest("tr");
+          const name = row.find(".name").val();
+          const imageInput = row.find(".image")[0];
+          const price = row.find(".price").val();
+          const quantity = row.find(".quantity").val();
+        
+          const formData = new FormData();
+          formData.append('Name', name);
+          formData.append('Price', price);
+          formData.append('Quantity', quantity);
+          formData.append('image', imageInput.files[0]);
+        
+          $.ajax({
+            url: '@Url.Action("Insert", "Products")',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              // Handle the response from the server
+            console.log(response);
+            row.find(".tdName").html(name);
+            row.find(".tdImage").html(imageInput.value); // Alternatively, you can display the file name instead of the full path
+            row.find(".tdPrice").html(price);
+            row.find(".tdQuantity").html(quantity);
+            row.find(".tdAction").html(rowButtons);
+        
             createNotification('Produkt byl úspěšně vytvořen!');
-            var data = { name: name, price: price, quantity: quantity };
-            $.ajax({
-                url: '@Url.Action("Insert", "Products")',
-                type: 'POST',
-                dataType: 'json',
-                data: $.param(data),
-                contentType: 'application/x-www-form-urlencoded'
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+                createNotification('Při vytváření produktu došlo k chybě. Zkuste to prosím znovu.');
+                }
             });
         });
         
@@ -167,6 +158,7 @@
         $('table tbody').on('click', '.btn-delete', function () {
             $(this).parent().parent().remove();
             var productId = $(this).closest('tr').find('input[name="productId"]').val();
+            console.log(productId)
             createNotification('Produkt byl úspěšně odstraněn!');
             $.ajax({
                 url: '@Url.Action("Delete", "Products")',
