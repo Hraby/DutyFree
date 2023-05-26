@@ -38,7 +38,7 @@ public class ProductsController : Controller
             products = products.Where(p => p.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
         }
         ViewBag.Search = search;
-        return View("Index", new AdminViewModel() { Products = products.ToList() });
+        return View("Index", new AdminViewModel { Products = products.ToList() });
     }
 
     [HttpPost]
