@@ -25,15 +25,7 @@ public class UserController : Controller
         IEnumerable<UserModel> users = _database.GetUsers();
         IEnumerable<OrderModel> orders = _database.GetOrders(currentUser.UserId);
 
-
-        var viewModel = new AdminViewModel()
-        {
-            Users = users.ToList(),
-            Orders = orders.ToList(),
-            CurrentUser = currentUser
-        };
-
-        return View(viewModel);
+        return View("Index",new AdminViewModel() { Users = users.ToList(), Orders = orders.ToList(), CurrentUser = currentUser });
     }
 
 
