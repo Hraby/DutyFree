@@ -14,6 +14,10 @@ Create table Products(
     ImageUrl NVARCHAR(1024)
 );
 
+insert into Products(DateCreated, CreatedBy, DateUpdated, UpdatedBy, IsDeleted, Name, Price, Quantity)
+values (GETDATE(), 1, GETDATE(), 1, 0, N'Kofola', 29, 5),
+       (GETDATE(), 1, GETDATE(), 1, 0, N'Cola', 29,4)
+
 CREATE PROCEDURE ProcProducts
 AS
 BEGIN
@@ -63,3 +67,32 @@ BEGIN
     WHERE ProductId = @ProductId
 END
 
+CREATE TABLE Users(
+    UserId int primary key identity,
+    Name nvarchar(256),
+    Email nvarchar(256),
+    ImageUrl varchar(1024),
+    Role int
+);
+
+CREATE TABLE Orders(
+    OrderId int primary key identity,
+    DateCreated datetime,
+    Name int,
+    Price int,
+    UserId int,
+    ProductId int
+)
+
+alter table Orders add foreign key (UserId) references Users(UserId);
+alter table Orders add foreign key (ProductId) references Products(ProductId);
+
+insert into Users(Name, Email, ImageUrl, Role) values (N'Filip', N'filip.dlouhy@gmail.com', null, 1 ),
+                                                      (N'Vašek', N'vasek.dolezal@gmail.com', null, 0),
+                                                      (N'Aneta', N'aneta.kralova@gmail.com',null,0);
+CREATE PROCEDURE ProcUsers
+AS
+BEGIN
+    SELECT *
+    FROM Users
+END
